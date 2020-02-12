@@ -676,6 +676,15 @@ MonoBehaviour:
   _forceMultiplier: 10
   _camera: {fileID: 963194227}
   _cameraLockTransform: {fileID: 1141913248}
+  _cameraYMax: 90
+  _cameraYMin: -90
+  _cameraXMax: 90
+  _cameraXMin: -90
+  _camRotationSmoothing: 1
+  _camOffset: {x: 0, y: 0, z: 0}
+  _rawMouseInput: 0
+  _mouseSensitivityX: 1
+  _mouseSensitivityY: 1
 --- !u!54 &1659043885
 Rigidbody:
   m_ObjectHideFlags: 0
