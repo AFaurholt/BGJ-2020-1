@@ -206,5 +206,21 @@ namespace com.runtime.GameJamBois.BGJ20201.Items {
                 itemCountStorage.Remove(item.getItemName());
             }
         }
+
+        /***** METHODS FOR TESTS ONLY *****/
+        public ArrayList GetOrderedStorage() {
+            TestUtils.logTestingWarning();
+            return itemOrderStorage;
+        }
+
+        public Dictionary<string, int> GetItemCountStorage() {
+            TestUtils.logTestingWarning();
+            return itemCountStorage;
+        }
+
+        public void SetArrayForItemsToStartWith(Item[] items) {
+            TestUtils.logTestingWarning();
+            itemsToStartWith = items;
+        }
     }
 }
