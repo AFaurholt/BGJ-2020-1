@@ -74,10 +74,23 @@ public static class VersionData
 
     public static void PopulateFromGit()
     {
-        data = new VersionDataHolder() {
-            Version = Build.Git.BuildVersion,
-            Hash = Build.Git.Hash
-        };
+        try
+        {
+            data = new VersionDataHolder()
+            {
+                Version = Build.Git.BuildVersion,
+                Hash = Build.Git.Hash
+            };
+        }
+        catch (Build.GitException e)
+        {
+            Debug.LogWarning($"Git Exception ({e.ExitCode}) thrown, no version data will be added");
+            data = new VersionDataHolder()
+            {
+                Version = NoVersionPlaceholder,
+                Hash = "version data was not found"
+            };
+        }
     }
 #endif
 }
