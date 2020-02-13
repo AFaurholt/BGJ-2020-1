@@ -595,6 +595,36 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1141913247}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1377806446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1377806447}
+  m_Layer: 0
+  m_Name: CamFocusExample
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1377806447
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377806446}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.737, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1659043883}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1429975879
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,6 +687,7 @@ Transform:
   m_Children:
   - {fileID: 836836871}
   - {fileID: 1141913248}
+  - {fileID: 1377806447}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -675,13 +706,15 @@ MonoBehaviour:
   _rigidbody: {fileID: 1659043885}
   _forceMultiplier: 10
   _camera: {fileID: 963194227}
-  _cameraLockTransform: {fileID: 1141913248}
+  _cameraLockTransform: {fileID: 1377806447}
+  _cameraIsOrbiting: 1
   _cameraYMax: 90
   _cameraYMin: -90
   _cameraXMax: 90
   _cameraXMin: -90
   _camRotationSmoothing: 1
-  _camOffset: {x: 0, y: 0, z: 0}
+  _camOffsetDistance: -1
+  _camOffsetVector: {x: 0, y: 0, z: 0}
   _rawMouseInput: 0
   _mouseSensitivityX: 1
   _mouseSensitivityY: 1
