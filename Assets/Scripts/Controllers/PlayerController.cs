@@ -20,15 +20,14 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         [SerializeField] private Camera _camera;
         [Tooltip("*Required")]
         [SerializeField] private Transform _cameraLockTransform;
+        [SerializeField] private bool _cameraIsOrbiting = true;
         [SerializeField] private float _cameraYMax = 90f;
         [SerializeField] private float _cameraYMin = 0f;
         [SerializeField] private float _cameraXMax = 90f;
         [SerializeField] private float _cameraXMin = 0f;
         [SerializeField] private bool _camRotationSmoothing = true;
-        [SerializeField] private Vector3 _camOffset = new Vector3(0, 0, 0);
-
-        private Vector2 _camDirection;
-        private Vector2 _playerDirection;
+        [SerializeField] private float _camOffsetDistance = 1f;
+        [SerializeField] private Vector3 _camOffsetVector = new Vector3();
 
         //TODO: refactor out
         [Header("Mouse")]
@@ -36,8 +35,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         [SerializeField] private float _mouseSensitivityX = 1f;
         [SerializeField] private float _mouseSensitivityY = 1f;
 
-        //last mouse position (for FPS)
-        private float _rotationX = 0f, _rotationY = 0f;
+        private Vector2 _camTargetRotations = new Vector2(0f, 0f);
 
         //the currently held keys
         //TODO: refactor better input system
@@ -57,15 +55,6 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
             //cache the current controls
             //TODO: refactor to better control scheme
             _controls = _currentKeys.Keys.ToArray();
-
-            //turn facing
-            //transform.rotation = Quaternion.LookRotation(Vector3.forward);
-
-            //set cam at lock position
-            //TODO: refactor out, cam stuff
-            _camera.transform.position = _cameraLockTransform.position - _camOffset;
-            _camDirection = _camera.transform.localRotation.eulerAngles;
-            _playerDirection = transform.localRotation.eulerAngles;
         }
 
         // Update is called once per frame
@@ -74,6 +63,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
             //cam
             //TODO: refactor out
             //ripped from https://forum.unity.com/threads/a-free-simple-smooth-mouselook.73117/
+            //and https://catlikecoding.com/unity/tutorials/movement/orbit-camera/
             float mouseY, mouseX;
             if (_rawMouseInput)
             {
@@ -84,33 +74,47 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
             {
                 mouseX = Input.GetAxis("Mouse X");
                 mouseY = Input.GetAxis("Mouse Y");
-
             }
-            mouseX *= _mouseSensitivityX;
-            mouseY *= _mouseSensitivityY;
+            Vector2 mouseInput = new Vector2(mouseY * _mouseSensitivityY,
+            mouseX * _mouseSensitivityX);
 
-            _rotationX += mouseX;
-            _rotationY += mouseY;
+            _camTargetRotations += mouseInput;
 
-            _rotationX = Mathf.Clamp(_rotationX, _cameraXMin, _cameraXMax);
-            _rotationY = Mathf.Clamp(_rotationY, _cameraYMin, _cameraYMax);
+            _camTargetRotations.x = Mathf.Clamp(_camTargetRotations.x, _cameraXMin, _cameraXMax);
+            _camTargetRotations.y = Mathf.Clamp(_camTargetRotations.y, _cameraYMin, _cameraYMax);
 
-            Quaternion qCamDirection = Quaternion.Euler(_camDirection);
-            _camera.transform.localRotation = Quaternion.AngleAxis(-_rotationY, qCamDirection * Vector3.right) * qCamDirection;
-            _camera.transform.localRotation *= Quaternion.AngleAxis(_rotationX, _camera.transform.InverseTransformDirection(Vector3.up));
+            if (_cameraIsOrbiting)
+            {
+                Quaternion lookRotation = Quaternion.Euler(_camTargetRotations);
+                Vector3 lookDirection = lookRotation * Vector3.forward;
+                Vector3 lookPosition = _cameraLockTransform.position - (lookDirection * _camOffsetDistance) - _camOffsetVector;
+                _camera.transform.SetPositionAndRotation(lookPosition, lookRotation);
+            }
+            else
+            {
+                //I'm aware you're not supposed to edit the rotation directly, but the camera is not going to use physics
+                _camera.transform.rotation = Quaternion.Euler(-_camTargetRotations.y, _camTargetRotations.x, 0);
+            }
 
             //movement
             _currentKeys = InputUtil.GetIfKeysHeld(_controls);
         }
 
+        //TODO refactor some cam stuff out and put it in lateupdate
+        //private void LateUpdate()
+        //{
+            
+        //}
         private void FixedUpdate()
         {
             SimpleMoveByForce();
 
             //TODO: refactor cam stuff
-            _camera.transform.position = _cameraLockTransform.position - _camOffset;
+            if (!_cameraIsOrbiting)
+            {
+                _camera.transform.position = _cameraLockTransform.position - _camOffsetVector;
+            }
 
-            //transform.rotation = _camera.transform.rotation;
         }
         /// <summary>
         /// Simple <see cref="UnityEngine.Rigidbody.AddRelativeForce(Vector3, ForceMode)"/> based on facing. Reads controls from <see cref="_currentKeys"/>
@@ -139,25 +143,6 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
                 }
             }
 
-        }
-
-        /// <summary>
-        /// Clamps the rotation around x-axis. Taken from the Unity Standard Assets Firsperson Controller (I don't understand Quaternions)
-        /// </summary>
-        /// <param name="q">The rotation</param>
-        /// <returns>The rotation clamped by <see cref="_cameraXMax"/> and <see cref="_cameraXMin"/></returns>
-        Quaternion ClampRotationAroundXAxis(Quaternion q)
-        {
-            q.x /= q.w;
-            q.y /= q.w;
-            q.z /= q.w;
-            q.w = 1.0f;
-
-            float angleX = 2.0f * Mathf.Rad2Deg * Mathf.Atan(q.x);
-            angleX = Mathf.Clamp(angleX, _cameraXMin, _cameraXMax);
-            q.x = Mathf.Tan(0.5f * Mathf.Deg2Rad * angleX);
-
-            return q;
         }
     }
 }
