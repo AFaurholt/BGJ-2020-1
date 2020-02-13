@@ -75,6 +75,10 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
                 mouseX = Input.GetAxis("Mouse X");
                 mouseY = Input.GetAxis("Mouse Y");
             }
+            if (_camOffsetDistance < 0)
+            {
+                mouseY *= -1;
+            }
             Vector2 mouseInput = new Vector2(mouseY * _mouseSensitivityY,
             mouseX * _mouseSensitivityX);
 
@@ -85,6 +89,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
 
             if (_cameraIsOrbiting)
             {
+               
                 Quaternion lookRotation = Quaternion.Euler(_camTargetRotations);
                 Vector3 lookDirection = lookRotation * Vector3.forward;
                 Vector3 lookPosition = _cameraLockTransform.position - (lookDirection * _camOffsetDistance) - _camOffsetVector;
