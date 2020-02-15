@@ -20,9 +20,22 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         [SerializeField] private Camera _camera;
         [Tooltip("*Required")]
         [SerializeField] private Transform _cameraLockTransform;
+        [SerializeField] private bool _cameraIsOrbiting = true;
+        [SerializeField] private float _cameraYMax = 90f;
+        [SerializeField] private float _cameraYMin = 0f;
+        [SerializeField] private float _cameraXMax = 90f;
+        [SerializeField] private float _cameraXMin = 0f;
+        [SerializeField] private bool _camRotationSmoothing = true;
+        [SerializeField] private float _camOffsetDistance = 1f;
+        [SerializeField] private Vector3 _camOffsetVector = new Vector3();
 
-        //last mouse position (for FPS)
-        private float _rotationX = 0f, _rotationY = 0f;
+        //TODO: refactor out
+        [Header("Mouse")]
+        [SerializeField] private bool _rawMouseInput = false;
+        [SerializeField] private float _mouseSensitivityX = 1f;
+        [SerializeField] private float _mouseSensitivityY = 1f;
+
+        private Vector2 _camTargetRotations = new Vector2(0f, 0f);
 
         //the currently held keys
         //TODO: refactor better input system
@@ -42,14 +55,6 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
             //cache the current controls
             //TODO: refactor to better control scheme
             _controls = _currentKeys.Keys.ToArray();
-
-            //turn facing
-            //transform.rotation = Quaternion.LookRotation(Vector3.forward);
-
-            //set cam at lock position
-            //TODO: refactor out, cam stuff
-            _camera.transform.position = _cameraLockTransform.position;
-
         }
 
         // Update is called once per frame
@@ -57,25 +62,64 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         {
             //cam
             //TODO: refactor out
-            //TODO: add clamp for Y
-            //TODO: add clamp for X for staggered turn (no owl head)
-            //TODO: add sensitivity
-            _rotationX = _camera.transform.localEulerAngles.y + Input.GetAxis("Mouse X");
-            _rotationY += Input.GetAxis("Mouse Y");
+            //ripped from https://forum.unity.com/threads/a-free-simple-smooth-mouselook.73117/
+            //and https://catlikecoding.com/unity/tutorials/movement/orbit-camera/
+            float mouseY, mouseX;
+            if (_rawMouseInput)
+            {
+                mouseX = Input.GetAxisRaw("Mouse X");
+                mouseY = Input.GetAxisRaw("Mouse Y");
+            }
+            else
+            {
+                mouseX = Input.GetAxis("Mouse X");
+                mouseY = Input.GetAxis("Mouse Y");
+            }
+            if (_camOffsetDistance < 0)
+            {
+                mouseY *= -1;
+            }
+            Vector2 mouseInput = new Vector2(mouseY * _mouseSensitivityY,
+            mouseX * _mouseSensitivityX);
 
-            _camera.transform.localEulerAngles = new Vector3(-_rotationY, _rotationX, 0);
+            _camTargetRotations += mouseInput;
+
+            _camTargetRotations.x = Mathf.Clamp(_camTargetRotations.x, _cameraXMin, _cameraXMax);
+            _camTargetRotations.y = Mathf.Clamp(_camTargetRotations.y, _cameraYMin, _cameraYMax);
+
+            if (_cameraIsOrbiting)
+            {
+               
+                Quaternion lookRotation = Quaternion.Euler(_camTargetRotations);
+                Vector3 lookDirection = lookRotation * Vector3.forward;
+                Vector3 lookPosition = _cameraLockTransform.position - (lookDirection * _camOffsetDistance) - _camOffsetVector;
+                _camera.transform.SetPositionAndRotation(lookPosition, lookRotation);
+            }
+            else
+            {
+                //I'm aware you're not supposed to edit the rotation directly, but the camera is not going to use physics
+                _camera.transform.rotation = Quaternion.Euler(-_camTargetRotations.y, _camTargetRotations.x, 0);
+            }
 
             //movement
             _currentKeys = InputUtil.GetIfKeysHeld(_controls);
         }
 
+        //TODO refactor some cam stuff out and put it in lateupdate
+        //private void LateUpdate()
+        //{
+            
+        //}
         private void FixedUpdate()
         {
             SimpleMoveByForce();
 
             //TODO: refactor cam stuff
-            _camera.transform.position = _cameraLockTransform.position;
-            transform.rotation = _camera.transform.rotation;
+            if (!_cameraIsOrbiting)
+            {
+                _camera.transform.position = _cameraLockTransform.position - _camOffsetVector;
+            }
+
         }
         /// <summary>
         /// Simple <see cref="UnityEngine.Rigidbody.AddRelativeForce(Vector3, ForceMode)"/> based on facing. Reads controls from <see cref="_currentKeys"/>
