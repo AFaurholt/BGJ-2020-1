@@ -75,6 +75,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
                 mouseX = Input.GetAxis("Mouse X");
                 mouseY = Input.GetAxis("Mouse Y");
             }
+
             if (_camOffsetDistance < 0)
             {
                 mouseY *= -1;
