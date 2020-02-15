@@ -18,12 +18,6 @@ namespace com.runtime.GameJamBois.BGJ20201.Behaviours
         [ConditionalHide("_isUsingSteps", true, true)]
         [SerializeField] private float _lerpDurationSeconds = 1f;
 
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
         // Update is called once per frame
         void LateUpdate()
         {
@@ -51,7 +45,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Behaviours
                     else
                     {
                         //we lerp
-                        transform.rotation = Quaternion.Lerp(transform.rotation, newQDirection, Time.deltaTime / _lerpDurationSeconds);
+                        transform.rotation = Quaternion.Lerp(transform.rotation, newQDirection, 1f * Time.deltaTime / _lerpDurationSeconds);
                     }
                 }
             }
