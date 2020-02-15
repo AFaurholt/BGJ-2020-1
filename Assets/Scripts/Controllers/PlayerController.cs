@@ -23,6 +23,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         [SerializeField] private bool _hasOneFocus = false;
         [SerializeField] private Transform _cameraPositionFocus = default;
         [ConditionalHide("_hasOneFocus", true, true)]
+        [Tooltip("*Not implemented")]
         [SerializeField] private Transform _cameraRotationFocus = default;
         [SerializeField] private bool _cameraIsOrbiting = true;
         [SerializeField] private float _camOffsetDistance = 1f;
@@ -30,16 +31,16 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         //[SerializeField] private bool _camRotationSmoothing = true;
         [Header("Clamping")]
         [SerializeField] private bool _isYClamped = true;
-        [SerializeField] private bool _isXClamped = true;
         [ConditionalHide("_isYClamped", true)]
         [SerializeField] private float _cameraYMax = 90f;
         [ConditionalHide("_isYClamped", true)]
         [SerializeField] private float _cameraYMin = 0f;
+        [Space]
+        [SerializeField] private bool _isXClamped = true;
         [ConditionalHide("_isXClamped", true)]
         [SerializeField] private float _cameraXMax = 90f;
         [ConditionalHide("_isXClamped", true)]
         [SerializeField] private float _cameraXMin = 0f;
-
 
         //TODO: refactor out
         [Header("Mouse")]
