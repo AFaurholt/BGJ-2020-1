@@ -264,7 +264,7 @@ MonoBehaviour:
   _targetTransform: {fileID: 963194228}
   _isLookAway: 1
   IsRotateAllowed: 1
-  _isUsingSteps: 1
+  _isUsingSteps: 0
   _stepSizeRadians: 1
   _lerpDurationSeconds: 1
 --- !u!23 &836836873
@@ -688,7 +688,6 @@ GameObject:
   - component: {fileID: 1659043883}
   - component: {fileID: 1659043884}
   - component: {fileID: 1659043885}
-  - component: {fileID: 1659043886}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -733,9 +732,9 @@ MonoBehaviour:
   _camOffsetDistance: -1
   _camOffsetVector: {x: 0, y: 0, z: 0}
   _isYClamped: 1
-  _isXClamped: 0
   _cameraYMax: 90
   _cameraYMin: -90
+  _isXClamped: 0
   _cameraXMax: 90
   _cameraXMin: -90
   _rawMouseInput: 0
@@ -757,24 +756,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &1659043886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1659043882}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ef8757cfc08b8e44a336527b51e21ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _targetTransform: {fileID: 963194228}
-  _isLookAway: 0
-  IsRotateAllowed: 1
-  _isUsingSteps: 0
-  _stepSizeRadians: 1
-  _lerpDurationSeconds: 1
 --- !u!1 &1782414246
 GameObject:
   m_ObjectHideFlags: 0
