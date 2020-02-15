@@ -7,7 +7,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Behaviours
     public class RotateTowardsBehaviour : MonoBehaviour
     {
         [Header("Basic stuff")]
-        [SerializeField] private Transform _targetTransform;
+        [SerializeField] private Transform _targetTransform = default;
         [SerializeField] private bool _isLookAway = true;
         public bool IsRotateAllowed = true;
 

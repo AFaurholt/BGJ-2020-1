@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 836836875}
   - component: {fileID: 836836874}
   - component: {fileID: 836836873}
+  - component: {fileID: 836836872}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -244,9 +245,28 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1141913248}
+  - {fileID: 1377806447}
   m_Father: {fileID: 1659043883}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &836836872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836836870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef8757cfc08b8e44a336527b51e21ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetTransform: {fileID: 963194228}
+  _isLookAway: 1
+  IsRotateAllowed: 1
+  _isUsingSteps: 1
+  _stepSizeRadians: 1
+  _lerpDurationSeconds: 1
 --- !u!23 &836836873
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -619,11 +639,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377806446}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.737, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.73699987, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1659043883}
+  m_Father: {fileID: 836836871}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1429975879
@@ -688,7 +708,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 836836871}
-  - {fileID: 1377806447}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -707,15 +726,18 @@ MonoBehaviour:
   _rigidbody: {fileID: 1659043885}
   _forceMultiplier: 10
   _camera: {fileID: 963194227}
-  _cameraLockTransform: {fileID: 1377806447}
+  _hasOneFocus: 1
+  _cameraPositionFocus: {fileID: 1377806447}
+  _cameraRotationFocus: {fileID: 0}
   _cameraIsOrbiting: 1
+  _camOffsetDistance: -1
+  _camOffsetVector: {x: 0, y: 0, z: 0}
+  _isYClamped: 1
+  _isXClamped: 0
   _cameraYMax: 90
   _cameraYMin: -90
   _cameraXMax: 90
   _cameraXMin: -90
-  _camRotationSmoothing: 1
-  _camOffsetDistance: -1
-  _camOffsetVector: {x: 0, y: 0, z: 0}
   _rawMouseInput: 0
   _mouseSensitivityX: 1
   _mouseSensitivityY: 1
@@ -742,7 +764,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659043882}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ef8757cfc08b8e44a336527b51e21ee, type: 3}
   m_Name: 
