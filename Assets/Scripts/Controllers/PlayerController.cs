@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using com.runtime.GameJamBois.BGJ20201.Util;
+using com.editor.GameJamBois.BGJ20201.Attributes;
 using System.Linq;
 
 namespace com.runtime.GameJamBois.BGJ20201.Controllers
@@ -10,24 +11,36 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
     {
         [Header("Physics")]
         [Tooltip("*Required")]
-        [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private Rigidbody _rigidbody = default;
         [SerializeField] private float _forceMultiplier = 5;
         [Space]
 
         //TODO: Refactor camera into scriptable object to allow for different cam styles
         [Header("Camera")]
         [Tooltip("*Required")]
-        [SerializeField] private Camera _camera;
+        [SerializeField] private Camera _camera = default;
         [Tooltip("*Required")]
-        [SerializeField] private Transform _cameraLockTransform;
+        [SerializeField] private bool _hasOneFocus = false;
+        [SerializeField] private Transform _cameraPositionFocus = default;
+        [ConditionalHide("_hasOneFocus", true, true)]
+        [Tooltip("*Not implemented")]
+        [SerializeField] private Transform _cameraRotationFocus = default;
         [SerializeField] private bool _cameraIsOrbiting = true;
-        [SerializeField] private float _cameraYMax = 90f;
-        [SerializeField] private float _cameraYMin = 0f;
-        [SerializeField] private float _cameraXMax = 90f;
-        [SerializeField] private float _cameraXMin = 0f;
-        [SerializeField] private bool _camRotationSmoothing = true;
         [SerializeField] private float _camOffsetDistance = 1f;
         [SerializeField] private Vector3 _camOffsetVector = new Vector3();
+        //[SerializeField] private bool _camRotationSmoothing = true;
+        [Header("Clamping")]
+        [SerializeField] private bool _isYClamped = true;
+        [ConditionalHide("_isYClamped", true)]
+        [SerializeField] private float _cameraYMax = 90f;
+        [ConditionalHide("_isYClamped", true)]
+        [SerializeField] private float _cameraYMin = 0f;
+        [Space]
+        [SerializeField] private bool _isXClamped = true;
+        [ConditionalHide("_isXClamped", true)]
+        [SerializeField] private float _cameraXMax = 90f;
+        [ConditionalHide("_isXClamped", true)]
+        [SerializeField] private float _cameraXMin = 0f;
 
         //TODO: refactor out
         [Header("Mouse")]
@@ -39,7 +52,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
 
         //the currently held keys
         //TODO: refactor better input system
-        private Dictionary<KeyCode, bool> _currentKeys = new Dictionary<KeyCode, bool>()
+        private IDictionary<KeyCode, bool> _currentKeys = new Dictionary<KeyCode, bool>()
         {
             { KeyCode.W, false },
             { KeyCode.A, false },
@@ -52,6 +65,11 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         // Start is called before the first frame update
         void Start()
         {
+            if (_hasOneFocus)
+            {
+                _cameraRotationFocus = _cameraPositionFocus;
+            }
+
             //cache the current controls
             //TODO: refactor to better control scheme
             _controls = _currentKeys.Keys.ToArray();
@@ -75,6 +93,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
                 mouseX = Input.GetAxis("Mouse X");
                 mouseY = Input.GetAxis("Mouse Y");
             }
+
             if (_camOffsetDistance < 0)
             {
                 mouseY *= -1;
@@ -83,16 +102,20 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
             mouseX * _mouseSensitivityX);
 
             _camTargetRotations += mouseInput;
-
-            _camTargetRotations.x = Mathf.Clamp(_camTargetRotations.x, _cameraXMin, _cameraXMax);
-            _camTargetRotations.y = Mathf.Clamp(_camTargetRotations.y, _cameraYMin, _cameraYMax);
+            if (_isYClamped)
+            {
+                _camTargetRotations.x = Mathf.Clamp(_camTargetRotations.x, _cameraYMin, _cameraYMax);
+            }
+            if (_isXClamped)
+            {
+                _camTargetRotations.y = Mathf.Clamp(_camTargetRotations.y, _cameraXMin, _cameraXMax);
+            }
 
             if (_cameraIsOrbiting)
             {
-               
                 Quaternion lookRotation = Quaternion.Euler(_camTargetRotations);
                 Vector3 lookDirection = lookRotation * Vector3.forward;
-                Vector3 lookPosition = _cameraLockTransform.position - (lookDirection * _camOffsetDistance) - _camOffsetVector;
+                Vector3 lookPosition = _cameraPositionFocus.position - (lookDirection * _camOffsetDistance) - _camOffsetVector;
                 _camera.transform.SetPositionAndRotation(lookPosition, lookRotation);
             }
             else
@@ -117,7 +140,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
             //TODO: refactor cam stuff
             if (!_cameraIsOrbiting)
             {
-                _camera.transform.position = _cameraLockTransform.position - _camOffsetVector;
+                _camera.transform.position = _cameraPositionFocus.position - _camOffsetVector;
             }
 
         }
@@ -149,5 +172,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
             }
 
         }
+
+
     }
 }
