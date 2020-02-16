@@ -23,7 +23,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         [SerializeField] private bool _hasOneFocus = false;
         [SerializeField] private bool _lockCursor = false;
         [SerializeField] private bool _cursorVisible = false;
-		[SerializeField] private Transform _cameraPositionFocus = default;
+        [SerializeField] private Transform _cameraPositionFocus = default;
         [ConditionalHide("_hasOneFocus", true, true)]
         [Tooltip("*Not implemented")]
         [SerializeField] private Transform _cameraRotationFocus = default;
@@ -43,15 +43,20 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         [SerializeField] private float _cameraXMax = 90f;
         [ConditionalHide("_isXClamped", true)]
         [SerializeField] private float _cameraXMin = 0f;
-		[SerializeField] private Vector3 _inputs = Vector3.zero;
+        [SerializeField] private Vector3 _inputs = Vector3.zero;
 
-		//TODO: refactor out
-		[Header("Mouse")]
+        //TODO: refactor out
+        [Header("Mouse")]
         [SerializeField] private bool _rawMouseInput = false;
         [SerializeField] private float _mouseSensitivityX = 1f;
         [SerializeField] private float _mouseSensitivityY = 1f;
 
         private Vector2 _camTargetRotations = new Vector2(0f, 0f);
+
+        // Jumping variables
+        [Header("Jumping")]
+        [SerializeField] private float jumpSpeed = 5;
+        [SerializeField] private bool isGrounded = true;
 
         //the currently held keys
         //TODO: refactor better input system
@@ -81,15 +86,15 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         // Update is called once per frame
         void Update()
         {
-			//cursor settings
-			if (_lockCursor)
-			{
-				Cursor.lockState = CursorLockMode.Locked;
-			}
-			if (_cursorVisible)
-			{
-				Cursor.visible = false;
-			}
+            //cursor settings
+            if (_lockCursor)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            if (_cursorVisible)
+            {
+                Cursor.visible = false;
+            }
             //cam
             //TODO: refactor out
             //ripped from https://forum.unity.com/threads/a-free-simple-smooth-mouselook.73117/
@@ -101,16 +106,16 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
             }
             else
             {
-				_inputs.x = Input.GetAxis("Mouse X");
-				_inputs.y = Input.GetAxis("Mouse Y");
+                _inputs.x = Input.GetAxis("Mouse X");
+                _inputs.y = Input.GetAxis("Mouse Y");
             }
 
             if (_camOffsetDistance < 0)
             {
-				_inputs.y *= -1;
+                _inputs.y *= -1;
             }
             Vector2 mouseInput = new Vector2(_inputs.y * _mouseSensitivityY,
-			_inputs.x * _mouseSensitivityX);
+            _inputs.x * _mouseSensitivityX);
 
             _camTargetRotations += mouseInput;
             if (_isYClamped)
@@ -135,22 +140,29 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
                 _camera.transform.rotation = Quaternion.Euler(-_camTargetRotations.y, _camTargetRotations.x, 0);
             }
 
+            // Jump
+            if (Input.GetKeyDown("space") && isGrounded)
+            {
+                _rigidbody.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+                isGrounded = false;
+            }
+
             //movement
             _currentKeys = InputUtil.GetIfKeysHeld(_controls);
 
-			PlayerMovement();
+            PlayerMovement();
         }
 
-		void PlayerMovement()
-		{
-			var Angle = Quaternion.AngleAxis(_camera.transform.rotation.eulerAngles.y, Vector3.up);
-			transform.rotation = Angle;
-		}
+        void PlayerMovement()
+        {
+            var Angle = Quaternion.AngleAxis(_camera.transform.rotation.eulerAngles.y, Vector3.up);
+            transform.rotation = Angle;
+        }
 
         //TODO refactor some cam stuff out and put it in lateupdate
         //private void LateUpdate()
         //{
-            
+
         //}
         private void FixedUpdate()
         {
@@ -175,25 +187,31 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
                     switch (item.Key)
                     {
                         case KeyCode.W:
-							MoveInDirection(Vector3.forward);
+                            MoveInDirection(Vector3.forward);
                             break;
                         case KeyCode.A:
-							MoveInDirection(Vector3.left);
+                            MoveInDirection(Vector3.left);
                             break;
                         case KeyCode.S:
-							MoveInDirection(Vector3.back);
-							break;
+                            MoveInDirection(Vector3.back);
+                            break;
                         case KeyCode.D:
-							MoveInDirection(Vector3.right);
-							break;
+                            MoveInDirection(Vector3.right);
+                            break;
                     }
                 }
             }
         }
 
-		void MoveInDirection(Vector3 direction)
-		{
-			_rigidbody.AddRelativeForce(direction * _forceMultiplier, ForceMode.Impulse);
-		}
-	}
+        void MoveInDirection(Vector3 direction)
+        {
+            _rigidbody.AddRelativeForce(direction * _forceMultiplier, ForceMode.Impulse);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.tag == "Enviroment")
+                isGrounded = true;
+        }
+    }
 }
