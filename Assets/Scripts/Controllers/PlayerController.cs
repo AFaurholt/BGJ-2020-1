@@ -52,7 +52,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
 
         //the currently held keys
         //TODO: refactor better input system
-        private Dictionary<KeyCode, bool> _currentKeys = new Dictionary<KeyCode, bool>()
+        private IDictionary<KeyCode, bool> _currentKeys = new Dictionary<KeyCode, bool>()
         {
             { KeyCode.W, false },
             { KeyCode.A, false },
@@ -172,5 +172,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
             }
 
         }
+
+
     }
 }
