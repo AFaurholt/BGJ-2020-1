@@ -50,6 +50,11 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
 
         private Vector2 _camTargetRotations = new Vector2(0f, 0f);
 
+        // Jumping variables
+        [Header("Jumping")]
+        [SerializeField] private float jumpSpeed = 5;
+        [SerializeField] private bool isGrounded = true;
+
         //the currently held keys
         //TODO: refactor better input system
         private IDictionary<KeyCode, bool> _currentKeys = new Dictionary<KeyCode, bool>()
@@ -124,6 +129,13 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
                 _camera.transform.rotation = Quaternion.Euler(-_camTargetRotations.y, _camTargetRotations.x, 0);
             }
 
+            // Jump
+            if(Input.GetKeyDown("space") && isGrounded)
+            {
+                _rigidbody.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+                isGrounded = false;
+            }
+
             //movement
             _currentKeys = InputUtil.GetIfKeysHeld(_controls);
         }
@@ -173,6 +185,10 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
 
         }
 
-
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.tag == "Enviroment")
+                isGrounded = true;
+        }
     }
 }

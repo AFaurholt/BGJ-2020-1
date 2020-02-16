@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 932995721}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Enviroment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -740,6 +740,8 @@ MonoBehaviour:
   _rawMouseInput: 0
   _mouseSensitivityX: 1
   _mouseSensitivityY: 1
+  jumpSpeed: 300
+  isGrounded: 1
 --- !u!54 &1659043885
 Rigidbody:
   m_ObjectHideFlags: 0
