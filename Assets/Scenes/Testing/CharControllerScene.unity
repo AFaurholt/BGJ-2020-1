@@ -1563,9 +1563,11 @@ MonoBehaviour:
   _cameraIsOrbiting: 1
   _camOffsetDistance: 5
   _camOffsetVector: {x: 0, y: 0, z: 0}
+  _hasRotationY: 1
   _isYClamped: 1
   _cameraYMax: 90
-  _cameraYMin: 0
+  _cameraYMin: -90
+  _hasRotationX: 0
   _isXClamped: 0
   _cameraXMax: 90
   _cameraXMin: 0
@@ -1573,6 +1575,8 @@ MonoBehaviour:
   _rawMouseInput: 0
   _mouseSensitivityX: 1
   _mouseSensitivityY: 1
+  _invertY: 1
+  _invertX: 0
   _lockCursor: 0
   _cursorVisible: 0
 --- !u!54 &1659043885
