@@ -1563,6 +1563,10 @@ MonoBehaviour:
   _cameraIsOrbiting: 1
   _camOffsetDistance: 5
   _camOffsetVector: {x: 0, y: 0, z: 0}
+  _hasCamMoveFactorY: 0
+  _cameraMoveFactorY: 0.1
+  _hasCamMoveFactorX: 1
+  _cameraMoveFactorX: 0.2
   _hasRotationY: 1
   _isYClamped: 1
   _cameraYMax: 90

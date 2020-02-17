@@ -19,20 +19,27 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         [SerializeField] private bool _cameraIsOrbiting = true;
         [SerializeField] private float _camOffsetDistance = 1f;
         [SerializeField] private Vector3 _camOffsetVector = new Vector3();
+        [Space]
+        [SerializeField] private bool _hasCamMoveFactorY = false;
+        [ConditionalHide("_hasCamMoveFactorY", false)]
+        [SerializeField] private float _cameraMoveFactorY = 0.5f;
+        [SerializeField] private bool _hasCamMoveFactorX = true;
+        [ConditionalHide("_hasCamMoveFactorX", false)]
+        [SerializeField] private float _cameraMoveFactorX = 0.5f;
         //[SerializeField] private bool _camRotationSmoothing = true;
         [Header("Clamping")]
         [SerializeField] private bool _hasRotationY = true;
         [SerializeField] private bool _isYClamped = true;
-        [ConditionalHide("_isYClamped", true)]
+        [ConditionalHide("_isYClamped", false)]
         [SerializeField] private float _cameraYMax = 90f;
-        [ConditionalHide("_isYClamped", true)]
+        [ConditionalHide("_isYClamped", false)]
         [SerializeField] private float _cameraYMin = 0f;
         [Space]
         [SerializeField] private bool _hasRotationX = true;
         [SerializeField] private bool _isXClamped = true;
-        [ConditionalHide("_isXClamped", true)]
+        [ConditionalHide("_isXClamped", false)]
         [SerializeField] private float _cameraXMax = 90f;
-        [ConditionalHide("_isXClamped", true)]
+        [ConditionalHide("_isXClamped", false)]
         [SerializeField] private float _cameraXMin = 0f;
         [SerializeField] private Vector3 _inputs = Vector3.zero;
 
@@ -112,7 +119,16 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
                     (_invertY ? -_camTargetRotations.y : _camTargetRotations.y),
                     (_invertX ? -_camTargetRotations.x : _camTargetRotations.x),
                     0f);
-                Vector3 lookPosition = _cameraPositionFocus.position - (lookRotationPos * Vector3.forward * _camOffsetDistance) - _camOffsetVector;
+                Vector3 lookPosition = _cameraPositionFocus.position - (lookRotation * Vector3.forward * _camOffsetDistance) - _camOffsetVector;
+                if (_hasCamMoveFactorX)
+                {
+                    lookPosition.x = _camTargetRotations.x * _cameraMoveFactorX;
+                }
+                if (_hasCamMoveFactorY)
+                {
+                    lookPosition.y = _camTargetRotations.y * _cameraMoveFactorY;
+
+                }
                 _camera.transform.SetPositionAndRotation(lookPosition, lookRotation);
             }
             else
