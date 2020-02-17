@@ -39,6 +39,8 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         [SerializeField] private bool _rawMouseInput = false;
         [SerializeField] private float _mouseSensitivityX = 1f;
         [SerializeField] private float _mouseSensitivityY = 1f;
+        [SerializeField] private bool _invertY = false;
+        [SerializeField] private bool _invertX = true;
         [Space]
         [SerializeField] private bool _lockCursor = false;
         [SerializeField] private bool _cursorVisible = false;
@@ -82,10 +84,13 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
             {
                 _inputs.y *= -1;
             }
-            Vector2 mouseInput = new Vector2(_inputs.y * _mouseSensitivityY,
-            _inputs.x * _mouseSensitivityX);
 
-            _camTargetRotations += mouseInput;
+            Vector2 mouseInput = new Vector2(_inputs.x * _mouseSensitivityX,
+            _inputs.y * _mouseSensitivityY);
+
+            _camTargetRotations.x += mouseInput.x;
+            _camTargetRotations.y += mouseInput.y;
+
             if (_isYClamped)
             {
                 _camTargetRotations.x = Mathf.Clamp(_camTargetRotations.x, _cameraYMin, _cameraYMax);
@@ -97,9 +102,11 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
 
             if (_cameraIsOrbiting)
             {
-                Quaternion lookRotation = Quaternion.Euler(_camTargetRotations);
-                Vector3 lookDirection = lookRotation * Vector3.forward;
-                Vector3 lookPosition = _cameraPositionFocus.position - (lookDirection * _camOffsetDistance) - _camOffsetVector;
+                Quaternion lookRotation = Quaternion.Euler(
+                    (_invertY ? -_camTargetRotations.y : _camTargetRotations.y), 
+                    (_invertX ? -_camTargetRotations.x : _camTargetRotations.x),
+                    0);
+                Vector3 lookPosition = _cameraPositionFocus.position - (lookRotation * Vector3.forward * _camOffsetDistance) - _camOffsetVector;
                 _camera.transform.SetPositionAndRotation(lookPosition, lookRotation);
             }
             else
