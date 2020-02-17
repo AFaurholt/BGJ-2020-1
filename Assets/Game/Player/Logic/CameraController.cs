@@ -21,12 +21,14 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         [SerializeField] private Vector3 _camOffsetVector = new Vector3();
         //[SerializeField] private bool _camRotationSmoothing = true;
         [Header("Clamping")]
+        [SerializeField] private bool _hasRotationY = true;
         [SerializeField] private bool _isYClamped = true;
         [ConditionalHide("_isYClamped", true)]
         [SerializeField] private float _cameraYMax = 90f;
         [ConditionalHide("_isYClamped", true)]
         [SerializeField] private float _cameraYMin = 0f;
         [Space]
+        [SerializeField] private bool _hasRotationX = true;
         [SerializeField] private bool _isXClamped = true;
         [ConditionalHide("_isXClamped", true)]
         [SerializeField] private float _cameraXMax = 90f;
@@ -103,10 +105,14 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
             if (_cameraIsOrbiting)
             {
                 Quaternion lookRotation = Quaternion.Euler(
-                    (_invertY ? -_camTargetRotations.y : _camTargetRotations.y), 
+                    (_hasRotationY ? (_invertY ? -_camTargetRotations.y : _camTargetRotations.y) : 0f), 
+                    (_hasRotationX ? (_invertX ? -_camTargetRotations.x : _camTargetRotations.x) : 0f),
+                    0f);
+                Quaternion lookRotationPos = Quaternion.Euler(
+                    (_invertY ? -_camTargetRotations.y : _camTargetRotations.y),
                     (_invertX ? -_camTargetRotations.x : _camTargetRotations.x),
-                    0);
-                Vector3 lookPosition = _cameraPositionFocus.position - (lookRotation * Vector3.forward * _camOffsetDistance) - _camOffsetVector;
+                    0f);
+                Vector3 lookPosition = _cameraPositionFocus.position - (lookRotationPos * Vector3.forward * _camOffsetDistance) - _camOffsetVector;
                 _camera.transform.SetPositionAndRotation(lookPosition, lookRotation);
             }
             else
