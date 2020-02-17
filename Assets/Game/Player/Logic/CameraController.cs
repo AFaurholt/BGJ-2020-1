@@ -26,6 +26,12 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         [SerializeField] private bool _hasCamMoveFactorX = true;
         [ConditionalHide("_hasCamMoveFactorX", false)]
         [SerializeField] private float _cameraMoveFactorX = 0.5f;
+        [Space]
+        [SerializeField] private bool _hasCircleCamPan = true;
+        [ConditionalHide("_addCircleCamPan", false)]
+        [SerializeField] private float _circleAngleMultiplier = 0.15f;
+        [ConditionalHide("_addCircleCamPan", false)]
+        [SerializeField] private float _circleRadius = 2f;
         //[SerializeField] private bool _camRotationSmoothing = true;
         [Header("Clamping")]
         [SerializeField] private bool _hasRotationY = true;
@@ -112,13 +118,10 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
             if (_cameraIsOrbiting)
             {
                 Quaternion lookRotation = Quaternion.Euler(
-                    (_hasRotationY ? (_invertY ? -_camTargetRotations.y : _camTargetRotations.y) : 0f), 
+                    (_hasRotationY ? (_invertY ? -_camTargetRotations.y : _camTargetRotations.y) : 0f),
                     (_hasRotationX ? (_invertX ? -_camTargetRotations.x : _camTargetRotations.x) : 0f),
                     0f);
-                Quaternion lookRotationPos = Quaternion.Euler(
-                    (_invertY ? -_camTargetRotations.y : _camTargetRotations.y),
-                    (_invertX ? -_camTargetRotations.x : _camTargetRotations.x),
-                    0f);
+
                 Vector3 lookPosition = _cameraPositionFocus.position - (lookRotation * Vector3.forward * _camOffsetDistance) - _camOffsetVector;
                 if (_hasCamMoveFactorX)
                 {
@@ -126,10 +129,18 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
                 }
                 if (_hasCamMoveFactorY)
                 {
-                    lookPosition.y = _camTargetRotations.y * _cameraMoveFactorY;
+                    lookPosition.y = _camTargetRotations.x;
 
                 }
+                if (_hasCircleCamPan)
+                {
+                    lookPosition.y += Mathf.Sin(_camTargetRotations.x * _circleAngleMultiplier) * _circleRadius;
+                    lookPosition.x += Mathf.Cos(_camTargetRotations.x * _circleAngleMultiplier) * _circleRadius;
+                }
+
                 _camera.transform.SetPositionAndRotation(lookPosition, lookRotation);
+                //_camera.transform.RotateAround(_cameraPositionFocus.position, Vector3.forward, _camTargetRotations.x - camTargetRotationsDelta.x);
+
             }
             else
             {

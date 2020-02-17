@@ -1565,8 +1565,9 @@ MonoBehaviour:
   _camOffsetVector: {x: 0, y: 0, z: 0}
   _hasCamMoveFactorY: 0
   _cameraMoveFactorY: 0.1
-  _hasCamMoveFactorX: 1
+  _hasCamMoveFactorX: 0
   _cameraMoveFactorX: 0.2
+  _addCircleCamPan: 1
   _hasRotationY: 1
   _isYClamped: 1
   _cameraYMax: 90
@@ -1611,7 +1612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 531b36f948458004cbdc08c0a6dd2236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GravityVector3: {x: 0, y: 0, z: 1}
+  GravityVector3: {x: 0, y: 0, z: 0}
   MoveForce: 5
   UpVector3: {x: 0, y: 1, z: 0}
   RightVector3: {x: 1, y: 0, z: 0}
