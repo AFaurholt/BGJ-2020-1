@@ -1518,8 +1518,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1659043883}
-  - component: {fileID: 1659043884}
   - component: {fileID: 1659043885}
+  - component: {fileID: 1659043884}
+  - component: {fileID: 1659043886}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1535,7 +1536,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659043882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.64, z: 0}
+  m_LocalPosition: {x: 0, y: 3.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1141913248}
@@ -1552,32 +1553,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1659043882}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30223d73710a1ba4ba64065a4c296bfa, type: 3}
+  m_Script: {fileID: 11500000, guid: fae49149e5aa78e4e8332b53643dbccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 1659043885}
-  _forceMultiplier: 10
   _camera: {fileID: 963194227}
   _hasOneFocus: 1
-  _lockCursor: 0
-  _cursorVisible: 0
   _cameraPositionFocus: {fileID: 1377806447}
   _cameraRotationFocus: {fileID: 0}
   _cameraIsOrbiting: 1
-  _camOffsetDistance: -1
+  _camOffsetDistance: 5
   _camOffsetVector: {x: 0, y: 0, z: 0}
   _isYClamped: 1
   _cameraYMax: 90
-  _cameraYMin: -90
+  _cameraYMin: 0
   _isXClamped: 0
   _cameraXMax: 90
-  _cameraXMin: -90
+  _cameraXMin: 0
   _inputs: {x: 0, y: 0, z: 0}
   _rawMouseInput: 0
   _mouseSensitivityX: 1
   _mouseSensitivityY: 1
-  jumpSpeed: 300
-  isGrounded: 1
+  _lockCursor: 0
+  _cursorVisible: 0
 --- !u!54 &1659043885
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1589,11 +1586,27 @@ Rigidbody:
   m_Mass: 60
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1659043886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659043882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 531b36f948458004cbdc08c0a6dd2236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GravityVector3: {x: 0, y: 0, z: 1}
+  MoveForce: 5
+  UpVector3: {x: 0, y: 1, z: 0}
+  RightVector3: {x: 1, y: 0, z: 0}
 --- !u!1 &1782414246
 GameObject:
   m_ObjectHideFlags: 0
