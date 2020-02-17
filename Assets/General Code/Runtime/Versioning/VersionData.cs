@@ -82,9 +82,9 @@ public static class VersionData
                 Hash = Build.Git.Hash
             };
         }
-        catch (Build.GitException e)
+        catch (System.Exception e)
         {
-            Debug.LogWarning($"Git Exception ({e.ExitCode}) thrown, no version data will be added");
+            Debug.LogWarning($"{e} thrown, no version data will be added");
             data = new VersionDataHolder()
             {
                 Version = NoVersionPlaceholder,
