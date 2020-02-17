@@ -1,0 +1,80 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public static class WormholeMeshGenerator
+{
+    private const int trisPerSegment = 2;
+
+    internal static Mesh GetCylinder(int resolution, int length, float radius)
+    {
+        Vector3[] verts = new Vector3[resolution * length];
+        Vector3[] normals = new Vector3[verts.Length];
+        for (int i = 0; i < length; i++)
+        {
+            Vector3 position = new Vector3(0, 0, i);
+            FillCircle(position, radius, resolution, verts, normals, i * resolution);
+        }
+
+        int[] tris = new int[(resolution * (length - 1)) * trisPerSegment * 3];
+        for (int ring = 0; ring < length - 1; ring++)
+        {
+
+            for (int vert = 0; vert < resolution; vert++)
+            {
+                // Generating most of the ring
+                int vertPos = ring * resolution + vert;
+                int trisPos = vertPos * trisPerSegment * 3;
+
+                tris[trisPos + 0] = GetIndexOnCylinder(vertPos, 0, 0, resolution);
+                tris[trisPos + 1] = GetIndexOnCylinder(vertPos, 1, 1, resolution);
+                tris[trisPos + 2] = GetIndexOnCylinder(vertPos, 1, 0, resolution);
+
+                tris[trisPos + 3] = GetIndexOnCylinder(vertPos, 0, 0, resolution);
+                tris[trisPos + 4] = GetIndexOnCylinder(vertPos, 0, 1, resolution);
+                tris[trisPos + 5] = GetIndexOnCylinder(vertPos, 1, 1, resolution);
+            }
+        }
+
+        return new Mesh()
+        {
+            vertices = verts,
+            triangles = tris,
+            normals = normals
+        };
+    }
+
+    private static void FillCircle(Vector3 position, float radius, int resolution, Vector3[] verts, Vector3[] normals, int startingIndex)
+    {
+        Vector3 direction = Vector3.up;
+        Quaternion rotationPerStep = Quaternion.Euler(0, 0, 360f / resolution);
+
+        for (int i = 0; i < resolution; i++)
+        {
+            int currentIndex = startingIndex + i;
+
+            verts[currentIndex] = position + direction * radius;
+            normals[currentIndex] = -direction;
+
+            direction = rotationPerStep * direction;
+        }
+    }
+
+    private static int GetIndexOnCylinder(int pos, int segment, int ring, int resolution)
+    {
+        // Gets ring offset, aka, index of first vert om ring
+        int ringOffset = (pos / resolution) * resolution;
+        
+        // Add ands round position in ring space
+        int posOnRing = pos - ringOffset;
+        posOnRing += segment;
+        posOnRing %= resolution;
+
+        // Ands removed offset
+        pos = posOnRing + ringOffset;
+
+        // Returns position offsetted by ring count
+        return pos + ring * resolution;
+    }
+}
