@@ -51,7 +51,7 @@ namespace com.editor.GameJamBois.BGJ20201.Attributes
             }
             else
             {
-                Debug.LogWarning("Attempting to use a ConditionalHideAttribute but no matching SourcePropertyValue found in object: " + condHAtt.ConditionalSourceField);
+                //Debug.LogWarning("Attempting to use a ConditionalHideAttribute but no matching SourcePropertyValue found in object: " + condHAtt.ConditionalSourceField);
             }
 
             return enabled;

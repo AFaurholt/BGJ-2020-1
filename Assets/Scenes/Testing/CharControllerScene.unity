@@ -479,8 +479,39 @@ SkinnedMeshRenderer:
   m_RootBone: {fileID: 0}
   m_AABB:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.35, y: 1.110223e-16, z: 1.75}
+    m_Extent: {x: 0.35000008, y: 1.1102233e-16, z: 1.7500002}
   m_DirtyAABB: 0
+--- !u!1 &684807807
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 684807808}
+  m_Layer: 0
+  m_Name: CameraHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &684807808
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684807807}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 963194228}
+  m_Father: {fileID: 1659043883}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,7 +860,7 @@ Transform:
   - {fileID: 1782414247}
   - {fileID: 1429975880}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &932995719
 GameObject:
@@ -1001,12 +1032,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.2519999, z: 0.45}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_Father: {fileID: 684807808}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1041237262
 GameObject:
@@ -1541,8 +1572,9 @@ Transform:
   m_Children:
   - {fileID: 1141913248}
   - {fileID: 836836871}
+  - {fileID: 684807808}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1659043884
 MonoBehaviour:
@@ -1557,6 +1589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 963194227}
+  CameraHolder: {fileID: 684807808}
   _hasOneFocus: 1
   _cameraPositionFocus: {fileID: 1377806447}
   _cameraRotationFocus: {fileID: 0}
@@ -1567,7 +1600,9 @@ MonoBehaviour:
   _cameraMoveFactorY: 0.1
   _hasCamMoveFactorX: 0
   _cameraMoveFactorX: 0.2
-  _addCircleCamPan: 1
+  _hasCircleCamPan: 1
+  _circleAngleMultiplier: 0.15
+  _circleRadius: 2
   _hasRotationY: 1
   _isYClamped: 1
   _cameraYMax: 90
@@ -1577,6 +1612,7 @@ MonoBehaviour:
   _cameraXMax: 90
   _cameraXMin: 0
   _inputs: {x: 0, y: 0, z: 0}
+  _rotateSpeed: 0.2
   _rawMouseInput: 0
   _mouseSensitivityX: 1
   _mouseSensitivityY: 1

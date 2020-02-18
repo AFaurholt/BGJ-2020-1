@@ -10,6 +10,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         [Header("Camera")]
         [Tooltip("*Required")]
         [SerializeField] private Camera _camera = default;
+        [SerializeField] private Transform CameraHolder;
         [Space]
         [SerializeField] private bool _hasOneFocus = false;
         [SerializeField] private Transform _cameraPositionFocus = default;
@@ -48,6 +49,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         [ConditionalHide("_isXClamped", false)]
         [SerializeField] private float _cameraXMin = 0f;
         [SerializeField] private Vector3 _inputs = Vector3.zero;
+        [SerializeField] private float _rotateSpeed = 0f;
 
         //TODO: refactor out
         [Header("Mouse")]
@@ -103,57 +105,16 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
             Vector2 mouseInput = new Vector2(_inputs.x * _mouseSensitivityX,
             _inputs.y * _mouseSensitivityY);
 
-            _camTargetRotations.x += mouseInput.x;
-            _camTargetRotations.y += mouseInput.y;
-
-            if (_isYClamped)
+             if (_cameraIsOrbiting)
             {
-                _camTargetRotations.x = Mathf.Clamp(_camTargetRotations.x, _cameraYMin, _cameraYMax);
-            }
-            if (_isXClamped)
-            {
-                _camTargetRotations.y = Mathf.Clamp(_camTargetRotations.y, _cameraXMin, _cameraXMax);
-            }
 
-            if (_cameraIsOrbiting)
-            {
-                Quaternion lookRotation = Quaternion.Euler(
-                    (_hasRotationY ? (_invertY ? -_camTargetRotations.y : _camTargetRotations.y) : 0f),
-                    (_hasRotationX ? (_invertX ? -_camTargetRotations.x : _camTargetRotations.x) : 0f),
-                    0f);
+                // Changes the CameraHolder's X rotation with mouseInput.y
+                Quaternion xRotation = Quaternion.Euler(mouseInput.y, 0f, 0f);
+                CameraHolder.rotation = xRotation * CameraHolder.rotation;
 
-                Vector3 lookPosition = _cameraPositionFocus.position - (lookRotation * Vector3.forward * _camOffsetDistance) - _camOffsetVector;
-                if (_hasCamMoveFactorX)
-                {
-                    lookPosition.x = _camTargetRotations.x * _cameraMoveFactorX;
-                }
-                if (_hasCamMoveFactorY)
-                {
-                    lookPosition.y = _camTargetRotations.x;
-
-                }
-                if (_hasCircleCamPan)
-                {
-                    lookPosition.y += Mathf.Sin(_camTargetRotations.x * _circleAngleMultiplier) * _circleRadius;
-                    lookPosition.x += Mathf.Cos(_camTargetRotations.x * _circleAngleMultiplier) * _circleRadius;
-                }
-
-                _camera.transform.SetPositionAndRotation(lookPosition, lookRotation);
-                //_camera.transform.RotateAround(_cameraPositionFocus.position, Vector3.forward, _camTargetRotations.x - camTargetRotationsDelta.x);
-
-            }
-            else
-            {
-                //I'm aware you're not supposed to edit the rotation directly, but the camera is not going to use physics
-                _camera.transform.rotation = Quaternion.Euler(-_camTargetRotations.y, _camTargetRotations.x, 0);
-            }
-        }
-
-        private void FixedUpdate()
-        {
-            if (!_cameraIsOrbiting)
-            {
-                _camera.transform.position = _cameraPositionFocus.position - _camOffsetVector;
+                // Changes the CameraHolder's Z rotation with mouseInput.x
+                Quaternion zRotation = Quaternion.Euler(0f, 0f, mouseInput.x);
+                CameraHolder.rotation = CameraHolder.rotation * zRotation;
             }
         }
     }
