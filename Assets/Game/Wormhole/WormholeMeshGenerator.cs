@@ -4,28 +4,47 @@ using UnityEngine;
 
 public static class WormholeMeshGenerator
 {
+    public enum RotationMode
+    {
+        AngleFromAxis, AnglePerStep
+    }
+
     private const int trisPerSegment = 4;
 
-    internal static Mesh GetCylinder(int resolution, int length, float radius, float randomRotation)
+    internal static Mesh GetCylinder(Vector3 up, Vector3 forward, Vector3 position, RotationMode mode, int resolution, int length, float radius, float rotationMax, float noiseSampleInterval)
     {
         Vector3[] verts = new Vector3[resolution * length];
         Vector3[] normals = new Vector3[verts.Length];
 
-        Vector3 currentPosition = Vector3.zero;
-        Vector3 currentDirection = Vector3.forward;
-        Vector3 currentUp = Vector3.up;
-        for (int i = 0; i < length; i++)
+        switch (mode)
         {
-            FillCircle(currentPosition, currentUp, currentDirection, radius, resolution, verts, normals, i * resolution);
-            currentPosition += currentDirection;
+            case RotationMode.AnglePerStep:
+                GenerateRingsRelativeToLast(up, forward, position, resolution, length, radius, rotationMax, noiseSampleInterval, verts, normals);
+                break;
+            case RotationMode.AngleFromAxis:
+                float noisePosition = 0;
+                float xNoiseSeed = Random.Range(-1236f, 21756f);
+                float yNoiseSeed = Random.Range(-8775f, 63287f) + xNoiseSeed;
 
-            Quaternion randomQuaternion = Quaternion.Euler(
-                Random.Range(-randomRotation, randomRotation),
-                Random.Range(-randomRotation, randomRotation), 
-                0);
-            currentDirection = randomQuaternion * currentDirection;
-            currentUp = randomQuaternion * currentUp;
+                Vector3 currentPosition = position;
+                for (int i = 0; i < length; i++)
+                {
+                    Quaternion randomQuaternion = Quaternion.Euler(
+                        (Mathf.PerlinNoise(noisePosition, xNoiseSeed) * 2 - 1) * rotationMax,
+                        (Mathf.PerlinNoise(noisePosition, yNoiseSeed) * 2 - 1) * rotationMax,
+                        0);
 
+                    noisePosition += noiseSampleInterval;
+
+                    Vector3 randomForward = randomQuaternion * forward;
+                    Vector3 randomUp = randomQuaternion * up;
+
+                    FillCircle(currentPosition, randomUp, randomForward, radius, resolution, verts, normals, i * resolution);
+                    currentPosition += randomForward;
+                }
+                break;
+            default:
+                break;
         }
 
         int[] tris = new int[(resolution * (length - 1)) * trisPerSegment * 3];
@@ -38,19 +57,19 @@ public static class WormholeMeshGenerator
                 int vertPos = ring * resolution + vert;
                 int trisPos = vertPos * trisPerSegment * 3;
 
-                tris[trisPos + 0 ] = GetIndexOnCylinder(vertPos, 0, 0, resolution);
-                tris[trisPos + 1 ] = GetIndexOnCylinder(vertPos, 1, 1, resolution);
-                tris[trisPos + 2 ] = GetIndexOnCylinder(vertPos, 1, 0, resolution);
+                tris[trisPos + 0] = GetIndexOnCylinder(vertPos, 0, 0, resolution);
+                tris[trisPos + 1] = GetIndexOnCylinder(vertPos, 1, 1, resolution);
+                tris[trisPos + 2] = GetIndexOnCylinder(vertPos, 1, 0, resolution);
 
-                tris[trisPos + 3 ] = GetIndexOnCylinder(vertPos, 0, 0, resolution);
-                tris[trisPos + 4 ] = GetIndexOnCylinder(vertPos, 0, 1, resolution);
-                tris[trisPos + 5 ] = GetIndexOnCylinder(vertPos, 1, 1, resolution);
+                tris[trisPos + 3] = GetIndexOnCylinder(vertPos, 0, 0, resolution);
+                tris[trisPos + 4] = GetIndexOnCylinder(vertPos, 0, 1, resolution);
+                tris[trisPos + 5] = GetIndexOnCylinder(vertPos, 1, 1, resolution);
 
-                tris[trisPos + 6 ] = GetIndexOnCylinder(vertPos, 0, 0, resolution);
-                tris[trisPos + 7 ] = GetIndexOnCylinder(vertPos, 1, 0, resolution);
-                tris[trisPos + 8 ] = GetIndexOnCylinder(vertPos, 1, 1, resolution);
+                tris[trisPos + 6] = GetIndexOnCylinder(vertPos, 0, 0, resolution);
+                tris[trisPos + 7] = GetIndexOnCylinder(vertPos, 1, 0, resolution);
+                tris[trisPos + 8] = GetIndexOnCylinder(vertPos, 1, 1, resolution);
 
-                tris[trisPos + 9 ] = GetIndexOnCylinder(vertPos, 0, 0, resolution);
+                tris[trisPos + 9] = GetIndexOnCylinder(vertPos, 0, 0, resolution);
                 tris[trisPos + 10] = GetIndexOnCylinder(vertPos, 1, 1, resolution);
                 tris[trisPos + 11] = GetIndexOnCylinder(vertPos, 0, 1, resolution);
             }
@@ -62,6 +81,33 @@ public static class WormholeMeshGenerator
             triangles = tris,
             normals = normals
         };
+    }
+
+    private static void GenerateRingsRelativeToLast(Vector3 up, Vector3 forward, Vector3 position, int resolution, int length, float radius, float rotationMax, float noiseSampleInterval, Vector3[] verts, Vector3[] normals)
+    {
+        float noisePosition = 0;
+        float xNoiseSeed = Random.value;
+        float yNoiseSeed = Random.value + xNoiseSeed;
+
+        Vector3 currentPosition = position;
+        Vector3 currentForward = forward;
+        Vector3 currentUp = up;
+        for (int i = 0; i < length; i++)
+        {
+            Quaternion randomQuaternion = Quaternion.Euler(
+                (Mathf.PerlinNoise(noisePosition, xNoiseSeed) * 2 - 1) * rotationMax,
+                (Mathf.PerlinNoise(noisePosition, yNoiseSeed) * 2 - 1) * rotationMax,
+                0);
+
+            noisePosition += noiseSampleInterval;
+
+            currentForward = randomQuaternion * currentForward;
+            currentUp = randomQuaternion * currentUp;
+
+            FillCircle(currentPosition, currentUp, currentForward, radius, resolution, verts, normals, i * resolution);
+            currentPosition += currentForward;
+
+        }
     }
 
     private static void FillCircle(Vector3 position, Vector3 up, Vector3 forward, float radius, int resolution, Vector3[] verts, Vector3[] normals, int startingIndex)
