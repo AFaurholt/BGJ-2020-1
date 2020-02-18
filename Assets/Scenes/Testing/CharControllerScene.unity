@@ -479,7 +479,7 @@ SkinnedMeshRenderer:
   m_RootBone: {fileID: 0}
   m_AABB:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.35000008, y: 1.1102233e-16, z: 1.7500002}
+    m_Extent: {x: 0.35, y: 1.110223e-16, z: 1.75}
   m_DirtyAABB: 0
 --- !u!1 &684807807
 GameObject:
@@ -1612,7 +1612,7 @@ MonoBehaviour:
   _cameraXMax: 90
   _cameraXMin: 0
   _inputs: {x: 0, y: 0, z: 0}
-  _rotateSpeed: 0.2
+  _rotateSpeed: 0.7
   _rawMouseInput: 0
   _mouseSensitivityX: 1
   _mouseSensitivityY: 1
