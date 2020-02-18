@@ -116,11 +116,11 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
                 Quaternion zRotation = Quaternion.Euler(0f, 0f, mouseInput.x);
                 CameraHolder.rotation = CameraHolder.rotation * zRotation;
 
-                // I couldn't finish this part
+                /* This part kinda screws it up
                 float playerRotation = transform.rotation.z;
                 float targetRotation = CameraHolder.transform.localRotation.z;
                 playerRotation = Mathf.Lerp(playerRotation, targetRotation, _rotateSpeed);
-                transform.rotation = Quaternion.Euler(0f, 0f, playerRotation);
+                transform.rotation = Quaternion.Euler(0f, 0f, playerRotation); */
             }
         }
     }
