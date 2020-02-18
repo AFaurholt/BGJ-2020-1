@@ -5,7 +5,7 @@ using UnityEngine;
 [ExecuteAlways]
 public class WormholeRenderer : MonoBehaviour
 {
-    [SerializeField] private MeshFilter filter;
+    [SerializeField] private MeshFilter filter = null;
     [Space]
     [SerializeField, Range(4, 90)] private int resolution = 10;
     [SerializeField, Range(2, 900)] private int length = 5;
@@ -14,7 +14,7 @@ public class WormholeRenderer : MonoBehaviour
     [SerializeField, Range(0, 90f)] private float randomRotation = 2;
     [SerializeField, Range(0.05f, 2f)] private float noiseSampleInterval = 0.2f;
     [SerializeField] private WormholeMeshGenerator.RotationMode rotationMode = WormholeMeshGenerator.RotationMode.AngleFromAxis;
-    [SerializeField] private int seed;
+    [SerializeField] private int seed = 28362;
 
     private void Update()
     {
