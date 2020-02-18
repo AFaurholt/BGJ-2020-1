@@ -11,7 +11,7 @@ public static class WormholeMeshGenerator
 
     private const int trisPerSegment = 4;
 
-    internal static Mesh GetCylinder(Vector3 up, Vector3 forward, Vector3 position, RotationMode mode, int resolution, int length, float radius, float rotationMax, float noiseSampleInterval)
+    internal static Mesh GetCylinder(Vector3 up, Vector3 forward, Vector3 position, RotationMode mode, int resolution, int length, float radius, float rotationMax, float noiseSampleInterval, float ringDistanceMultiplier)
     {
         Vector3[] verts = new Vector3[resolution * length];
         Vector3[] normals = new Vector3[verts.Length];
@@ -19,7 +19,7 @@ public static class WormholeMeshGenerator
         switch (mode)
         {
             case RotationMode.AnglePerStep:
-                GenerateRingsRelativeToLast(up, forward, position, resolution, length, radius, rotationMax, noiseSampleInterval, verts, normals);
+                GenerateRingsRelativeToLast(up, forward, position, resolution, length, radius, rotationMax, noiseSampleInterval, ringDistanceMultiplier, verts, normals);
                 break;
             case RotationMode.AngleFromAxis:
                 float noisePosition = 0;
@@ -40,7 +40,7 @@ public static class WormholeMeshGenerator
                     Vector3 randomUp = randomQuaternion * up;
 
                     FillCircle(currentPosition, randomUp, randomForward, radius, resolution, verts, normals, i * resolution);
-                    currentPosition += randomForward;
+                    currentPosition += randomForward * ringDistanceMultiplier;
                 }
                 break;
             default:
@@ -83,7 +83,7 @@ public static class WormholeMeshGenerator
         };
     }
 
-    private static void GenerateRingsRelativeToLast(Vector3 up, Vector3 forward, Vector3 position, int resolution, int length, float radius, float rotationMax, float noiseSampleInterval, Vector3[] verts, Vector3[] normals)
+    private static void GenerateRingsRelativeToLast(Vector3 up, Vector3 forward, Vector3 position, int resolution, int length, float radius, float rotationMax, float noiseSampleInterval, float ringDistanceMultiplier, Vector3[] verts, Vector3[] normals)
     {
         float noisePosition = 0;
         float xNoiseSeed = Random.value;
@@ -105,7 +105,7 @@ public static class WormholeMeshGenerator
             currentUp = randomQuaternion * currentUp;
 
             FillCircle(currentPosition, currentUp, currentForward, radius, resolution, verts, normals, i * resolution);
-            currentPosition += currentForward;
+            currentPosition += currentForward * ringDistanceMultiplier;
 
         }
     }
