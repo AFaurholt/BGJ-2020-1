@@ -113,7 +113,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
                 CameraHolder.rotation = xRotation * CameraHolder.rotation;
 
                 // Changes the CameraHolder's Z rotation with mouseInput.x
-                Quaternion zRotation = Quaternion.Euler(0f, 0f, mouseInput.x);
+                Quaternion zRotation = Quaternion.Euler(0f, 0f, -mouseInput.x);
                 CameraHolder.rotation = CameraHolder.rotation * zRotation;
 
                 /* This part kinda screws it up
