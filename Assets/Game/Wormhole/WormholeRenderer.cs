@@ -5,11 +5,12 @@ using UnityEngine;
 [ExecuteAlways]
 public class WormholeRenderer : MonoBehaviour
 {
-    [SerializeField] private MeshFilter filter = null;
+    [SerializeField] private MeshFilter[] filters = null;
     [Space]
     [SerializeField] DisplayedSettings settings = new DisplayedSettings();
     [Space]
     [SerializeField] private int seed = 28362;
+    [SerializeField] private float noiseStartOffset = 21f;
 
     [System.Serializable]
     public class DisplayedSettings
@@ -23,24 +24,35 @@ public class WormholeRenderer : MonoBehaviour
         [SerializeField] private WormholeSettings.RotationMode rotationMode = WormholeSettings.RotationMode.AngleFromAxis;
         [SerializeField, Range(0, 180f)] private float maxRandomAngle = 2;
         [SerializeField, Range(0.001f, 2f)] private float noiseVariation = 0.2f;
-        [Header("Axes")]
-        [SerializeField] private Vector3 up = Vector3.up;
-        [SerializeField] private Vector3 forward = Vector3.forward;
-        [SerializeField] private Vector3 offset = Vector3.zero;
 
         public static explicit operator WormholeSettings(DisplayedSettings s)
         {
-            return new WormholeSettings(s.up, s.forward, s.offset, s.rotationMode, s.vertsPerRing, s.ringAmount, s.ringRadius, s.maxRandomAngle, s.noiseVariation, s.ringLength);
+            return new WormholeSettings(Vector3.up, Vector3.forward, Vector3.zero, s.rotationMode, s.vertsPerRing, s.ringAmount, s.ringRadius, s.maxRandomAngle, s.noiseVariation, s.ringLength);
         }
     }
 
     private void Update()
     {
-        if(filter != null)
+        if (filters != null)
         {
             Random.InitState(seed);
-            Mesh mesh = WormholeMeshGenerator.GetWormhole((WormholeSettings)settings);
-            filter.mesh = mesh;
+            WormholeSettings holeSettings = (WormholeSettings)settings;
+
+            WormholeResult lastWormhole = new WormholeResult();
+            Transform lastTransform = transform;
+
+            for (int i = 0; i < filters.Length; i++)
+            {
+                float noiseOffset = noiseStartOffset + holeSettings.NoiseSampleInterval * holeSettings.Length * i;
+
+                filters[i].transform.localPosition = lastTransform.TransformPoint(lastWormhole.LastPos);
+
+                Random.InitState(seed);
+                lastWormhole = WormholeMeshGenerator.GetWormhole(holeSettings, noiseOffset, true, lastWormhole.LastRot);
+                filters[i].mesh = lastWormhole.Mesh;
+
+                lastTransform = filters[i].transform;
+            }
         }
     }
 }

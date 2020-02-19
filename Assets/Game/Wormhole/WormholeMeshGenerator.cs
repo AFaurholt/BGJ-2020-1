@@ -2,6 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+internal struct WormholeResult
+{
+    public Mesh Mesh;
+    public Vector3 LastPos;
+    public Quaternion LastRot;
+
+    public WormholeResult(Mesh mesh, Vector3 lastPos, Quaternion lastRot)
+    {
+        Mesh = mesh;
+        LastPos = lastPos;
+        LastRot = lastRot;
+    }
+}
+
 public struct WormholeSettings
 {
     public enum RotationMode
@@ -39,18 +53,20 @@ public static class WormholeMeshGenerator
 {
     private const int trisPerSegment = 4;
 
-    internal static Mesh GetWormhole(WormholeSettings settings, bool startFlat = true)
+    internal static WormholeResult GetWormhole(WormholeSettings settings, float noiseOffset, bool startFlat, Quaternion startRotation)
     {
         Vector3[] verts = new Vector3[settings.Resolution * settings.Length];
         Vector3[] normals = new Vector3[verts.Length];
 
+        (Vector3 T, Quaternion R) lastRingRT = (Vector3.zero, Quaternion.identity);
+
         switch (settings.Mode)
         {
             case WormholeSettings.RotationMode.AnglePerStep:
-                GenerateRingsRelativeToLast(settings, verts, normals);
+                lastRingRT = GenerateRingsRelativeToLast(settings, verts, normals, noiseOffset);
                 break;
             case WormholeSettings.RotationMode.AngleFromAxis:
-                GenerateRingsRelativeToAxis(settings, verts, normals, startFlat);
+                lastRingRT = GenerateRingsRelativeToAxis(settings, verts, normals, startFlat, noiseOffset, startRotation);
                 break;
             default:
                 break;
@@ -58,12 +74,14 @@ public static class WormholeMeshGenerator
 
         int[] tris = BridgeLoops(settings);
 
-        return new Mesh()
+        Mesh mesh = new Mesh()
         {
             vertices = verts,
             triangles = tris,
             normals = normals
         };
+
+        return new WormholeResult(mesh, lastRingRT.T, lastRingRT.R);
     }
 
     private static int[] BridgeLoops(WormholeSettings settings)
@@ -99,9 +117,9 @@ public static class WormholeMeshGenerator
         return tris;
     }
 
-    private static void GenerateRingsRelativeToAxis(WormholeSettings settings, Vector3[] verts, Vector3[] normals, bool startFlat)
+    private static (Vector3 position, Quaternion finalRotation) GenerateRingsRelativeToAxis(WormholeSettings settings, Vector3[] verts, Vector3[] normals, bool startFlat, float noiseOffset, Quaternion startRotation)
     {
-        float noisePosition = 0;
+        float noisePosition = noiseOffset;
         float xNoiseSeed = Random.Range(-1236f, 21756f);
         float yNoiseSeed = Random.Range(-8775f, 63287f) + xNoiseSeed;
         float zNoiseSeed = Random.Range(-9849f, 153f) + yNoiseSeed;
@@ -109,6 +127,7 @@ public static class WormholeMeshGenerator
         Vector3 currentPosition = settings.Origin;
         for (int i = 0; i < settings.Length; i++)
         {
+
             Quaternion randomQuaternion = Quaternion.Euler(
                 (Mathf.PerlinNoise(noisePosition, xNoiseSeed) * 2 - 1) * settings.RotationMax,
                 (Mathf.PerlinNoise(noisePosition, yNoiseSeed) * 2 - 1) * settings.RotationMax,
@@ -116,7 +135,7 @@ public static class WormholeMeshGenerator
             );
 
             if(startFlat)
-                randomQuaternion = Quaternion.Slerp(Quaternion.identity, randomQuaternion, i / 3f);
+                randomQuaternion = Quaternion.Slerp(startRotation, randomQuaternion, i / 3f);
 
             noisePosition += settings.NoiseSampleInterval;
 
@@ -125,13 +144,18 @@ public static class WormholeMeshGenerator
 
             FillCircle(settings, currentPosition, randomUp, randomForward, verts, normals, i);
 
-            currentPosition += randomForward * settings.RingDistanceMultiplier;
+            if (i != settings.Length - 1)
+                currentPosition += randomForward * settings.RingDistanceMultiplier;
+            else
+                return (currentPosition, randomQuaternion);
         }
+
+        return (Vector3.zero, Quaternion.identity);
     }
 
-    private static void GenerateRingsRelativeToLast(WormholeSettings settings, Vector3[] verts, Vector3[] normals)
+    private static (Vector3 position, Quaternion finalRotation) GenerateRingsRelativeToLast(WormholeSettings settings, Vector3[] verts, Vector3[] normals, float noiseOffset)
     {
-        float noisePosition = 0;
+        float noisePosition = noiseOffset;
         float xNoiseSeed = Random.Range(-1236f, 21756f);
         float yNoiseSeed = Random.Range(-8775f, 63287f) + xNoiseSeed;
         float zNoiseSeed = Random.Range(-9849f, 153f) + yNoiseSeed;
@@ -153,9 +177,12 @@ public static class WormholeMeshGenerator
             currentUp = randomQuaternion * currentUp;
 
             FillCircle(settings, currentPosition, currentUp, currentForward, verts, normals, i);
-            currentPosition += currentForward * settings.RingDistanceMultiplier;
 
+            if (i != settings.Length - 1)
+                currentPosition += currentForward * settings.RingDistanceMultiplier;
         }
+
+        return (currentPosition, Quaternion.FromToRotation(settings.Forward, currentForward));
     }
 
     private static void FillCircle(WormholeSettings settings, Vector3 position, Vector3 up, Vector3 forward, Vector3[] verts, Vector3[] normals, int ringID)
