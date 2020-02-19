@@ -105,7 +105,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
             Vector2 mouseInput = new Vector2(_inputs.x * _mouseSensitivityX,
             _inputs.y * _mouseSensitivityY);
 
-             if (_cameraIsOrbiting)
+            if (_cameraIsOrbiting)
             {
 
                 // Changes the CameraHolder's X rotation with mouseInput.y
@@ -116,11 +116,17 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
                 Quaternion zRotation = Quaternion.Euler(0f, 0f, -mouseInput.x);
                 CameraHolder.rotation = CameraHolder.rotation * zRotation;
 
-                /* This part kinda screws it up
-                float playerRotation = transform.rotation.z;
-                float targetRotation = CameraHolder.transform.localRotation.z;
-                playerRotation = Mathf.Lerp(playerRotation, targetRotation, _rotateSpeed);
-                transform.rotation = Quaternion.Euler(0f, 0f, playerRotation); */
+                Quaternion oldCameraRotation = transform.rotation;
+
+                Vector3 targetAngle = CameraHolder.rotation.eulerAngles;
+                Vector3 currentAngle = transform.rotation.eulerAngles;
+
+                currentAngle = new Vector3(0f, 0f,
+                    Mathf.LerpAngle(currentAngle.z, targetAngle.z, Time.deltaTime));
+
+                transform.eulerAngles = currentAngle;
+
+                //CameraHolder.rotation = CameraHolder.rotation * Quaternion.Inverse(transform.rotation);
             }
         }
     }

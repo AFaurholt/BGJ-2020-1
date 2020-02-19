@@ -1612,7 +1612,7 @@ MonoBehaviour:
   _cameraXMax: 90
   _cameraXMin: 0
   _inputs: {x: 0, y: 0, z: 0}
-  _rotateSpeed: 0.7
+  _rotateSpeed: 50
   _rawMouseInput: 0
   _mouseSensitivityX: 1
   _mouseSensitivityY: 1
