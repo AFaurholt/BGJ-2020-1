@@ -116,17 +116,18 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
                 Quaternion zRotation = Quaternion.Euler(0f, 0f, -mouseInput.x);
                 CameraHolder.rotation = CameraHolder.rotation * zRotation;
 
-                Quaternion oldCameraRotation = transform.rotation;
+                Quaternion oldPlayerRotation = transform.rotation;
 
                 Vector3 targetAngle = CameraHolder.rotation.eulerAngles;
                 Vector3 currentAngle = transform.rotation.eulerAngles;
 
                 currentAngle = new Vector3(0f, 0f,
-                    Mathf.LerpAngle(currentAngle.z, targetAngle.z, Time.deltaTime));
+                    Mathf.LerpAngle(currentAngle.z, targetAngle.z, Time.deltaTime * _rotateSpeed));
 
                 transform.eulerAngles = currentAngle;
 
-                //CameraHolder.rotation = CameraHolder.rotation * Quaternion.Inverse(transform.rotation);
+                Quaternion playerRotDiff = transform.rotation * Quaternion.Inverse(oldPlayerRotation);
+                CameraHolder.rotation = CameraHolder.rotation * Quaternion.Inverse(playerRotDiff);
             }
         }
     }
