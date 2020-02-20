@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class LimbRemoval : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private const int ObstacleLayerInt = 8;
+
+
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.layer == ObstacleLayerInt)
+        {
+
+            gameObject.transform.parent = null;
+            if (gameObject.transform.parent == null)
+                Destroy(gameObject);
+            this.GetComponent<LimbRemoval>().enabled = false;
+
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
