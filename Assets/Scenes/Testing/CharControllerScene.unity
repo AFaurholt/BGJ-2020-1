@@ -1557,17 +1557,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 963194227}
-  _hasOneFocus: 1
   _cameraPositionFocus: {fileID: 1377806447}
-  _cameraRotationFocus: {fileID: 0}
   _cameraIsOrbiting: 1
   _camOffsetDistance: 5
   _camOffsetVector: {x: 0, y: 0, z: 0}
   _hasCamMoveFactorY: 0
-  _cameraMoveFactorY: 0.1
   _hasCamMoveFactorX: 0
   _cameraMoveFactorX: 0.2
-  _addCircleCamPan: 1
+  _hasCircleCamPan: 1
+  _circleAngleMultiplier: 0.15
+  _circleRadius: 2
   _hasRotationY: 1
   _isYClamped: 1
   _cameraYMax: 90
@@ -1616,6 +1615,7 @@ MonoBehaviour:
   MoveForce: 5
   UpVector3: {x: 0, y: 1, z: 0}
   RightVector3: {x: 1, y: 0, z: 0}
+  _velocitySmoothing: 0.2
 --- !u!1 &1782414246
 GameObject:
   m_ObjectHideFlags: 0

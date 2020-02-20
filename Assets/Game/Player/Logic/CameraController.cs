@@ -11,18 +11,18 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         [Tooltip("*Required")]
         [SerializeField] private Camera _camera = default;
         [Space]
-        [SerializeField] private bool _hasOneFocus = false;
+        //[SerializeField] private bool _hasOneFocus = false;
         [SerializeField] private Transform _cameraPositionFocus = default;
-        [ConditionalHide("_hasOneFocus", true, true)]
-        [Tooltip("*Not implemented")]
-        [SerializeField] private Transform _cameraRotationFocus = default;
+        //[ConditionalHide("_hasOneFocus", true, true)]
+        //[Tooltip("*Not implemented")]
+        //[SerializeField] private Transform _cameraRotationFocus = default;
         [SerializeField] private bool _cameraIsOrbiting = true;
         [SerializeField] private float _camOffsetDistance = 1f;
         [SerializeField] private Vector3 _camOffsetVector = new Vector3();
         [Space]
         [SerializeField] private bool _hasCamMoveFactorY = false;
-        [ConditionalHide("_hasCamMoveFactorY", false)]
-        [SerializeField] private float _cameraMoveFactorY = 0.5f;
+        //[ConditionalHide("_hasCamMoveFactorY", false)]
+        //[SerializeField] private float _cameraMoveFactorY = 0.5f;
         [SerializeField] private bool _hasCamMoveFactorX = true;
         [ConditionalHide("_hasCamMoveFactorX", false)]
         [SerializeField] private float _cameraMoveFactorX = 0.5f;
@@ -64,10 +64,10 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         // Start is called before the first frame update
         void Start()
         {
-            if (_hasOneFocus)
-            {
-                _cameraRotationFocus = _cameraPositionFocus;
-            }
+            //if (_hasOneFocus)
+            //{
+            //    _cameraRotationFocus = _cameraPositionFocus;
+            //}
             //cursor settings
             if (_lockCursor)
             {

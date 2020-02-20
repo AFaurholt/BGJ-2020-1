@@ -14,6 +14,9 @@ public class FlyingPlayerController : MonoBehaviour
     public Vector3 RightVector3 = Vector3.right;
 
     private Rigidbody _rb;
+    private Vector3 _internalVelocity = Vector3.zero;
+    private Vector3 _currentMoveVector = new Vector3();
+    [SerializeField] private float _smoothTime = 0.1f;
 
     //the currently held keys
     //TODO: refactor better input system
@@ -42,10 +45,9 @@ public class FlyingPlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Vector3 currentMoveVector = GetMovementVector(_currentKeys, MoveForce);
-
-
-        _rb.velocity = GravityVector3 + currentMoveVector;
+        Vector3 targetMoveVector = GetMovementVector(_currentKeys, MoveForce);
+        _currentMoveVector = Vector3.SmoothDamp(_currentMoveVector, targetMoveVector, ref _internalVelocity, _smoothTime);
+        _rb.velocity = GravityVector3 + _currentMoveVector;
     }
 
     /// <summary>
