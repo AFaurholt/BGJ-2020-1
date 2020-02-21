@@ -983,7 +983,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalPosition: {x: 0, y: 1.27, z: -5.53}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 2041088706}
@@ -1474,12 +1474,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _parentTransform: {fileID: 1659043883}
   _rawMouseInput: 0
-  _mouseSensitivityX: 5
-  _mouseSensitivityY: 5
+  _mouseSensitivityX: 1
+  _mouseSensitivityY: 1
   _editorMouseBehaviourX: 06000000
   _editorMouseBehaviourY: 04000000
   _useAlternateScheme: 1
-  XVector3: {x: 0, y: 0, z: 1}
+  XVector3: {x: 0, y: 0, z: -1}
   YVector3: {x: 1, y: 0, z: 0}
   _orbitTarget: {fileID: 0}
   _isClampingX: 0
@@ -1787,10 +1787,10 @@ MonoBehaviour:
   UseInRecordMode: 0
   CopyTransform: {fileID: 1377806447}
   IsCopyPosition: 1
-  HasSmoothingPosition: 1
+  HasSmoothingPosition: 0
   SmoothTimePosition: 0.1
   IsCopyRotation: 1
-  HasSmoothingRotation: 1
+  HasSmoothingRotation: 0
   RotationSpeed: 100
   CameraOffsetVector3: {x: 0, y: 0, z: 0}
 --- !u!4 &2041088706
@@ -1801,7 +1801,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2041088704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 4.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963194228}
