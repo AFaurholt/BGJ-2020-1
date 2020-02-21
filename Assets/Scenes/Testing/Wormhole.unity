@@ -294,6 +294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 187576275}
   - component: {fileID: 187576276}
+  - component: {fileID: 187576277}
   m_Layer: 0
   m_Name: Wormhole Generator
   m_TagString: Untagged
@@ -337,6 +338,20 @@ MonoBehaviour:
     rotationMode: 0
     maxRandomAngle: 30
     noiseVariation: 0.04
+  meshCount: 5
+--- !u!114 &187576277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187576274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a47c6f35127c94bb56de069494be53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1000
 --- !u!43 &198770606
 Mesh:
   m_ObjectHideFlags: 0
@@ -2364,6 +2379,7 @@ GameObject:
   - component: {fileID: 1434290345}
   - component: {fileID: 1434290347}
   - component: {fileID: 1434290346}
+  - component: {fileID: 1434290348}
   m_Layer: 0
   m_Name: Wormhole Mesh
   m_TagString: Untagged
@@ -2432,6 +2448,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1434290344}
   m_Mesh: {fileID: 0}
+--- !u!114 &1434290348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434290344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5e7bd6760298a44b068eb6374fc5bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1444020574
 GameObject:
   m_ObjectHideFlags: 0

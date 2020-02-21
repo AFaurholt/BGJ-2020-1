@@ -6,6 +6,9 @@ public class InfiniteWormholeGenerator : MonoBehaviour
 {
     [SerializeField] private MeshFilter filterTemplate = null;
     [SerializeField] DisplayedWormholeSettings settings = new DisplayedWormholeSettings();
+    [Space]
+    [SerializeField] private int meshCount = 5;
+    [SerializeField] private float killDistance = -500;
 
     private Transform lastTransform = null;
     private WormholeResult lastWormholeResult = new WormholeResult(null, Vector3.zero, Quaternion.identity);
@@ -14,25 +17,34 @@ public class InfiniteWormholeGenerator : MonoBehaviour
     private float noiseStartOffset;
     private int i;
 
+    private Queue<MeshFilter> filters = new Queue<MeshFilter>();
+
     private void Awake()
     {
         i = 0;
-        seed = Random.Range(124, 128734714);
+        seed = Random.Range(int.MinValue, int.MaxValue);
         noiseStartOffset = Random.Range(15f, 125f);
 
         lastTransform = transform;
-        GenerateSegment();
+        for (int i = 0; i < meshCount; i++)
+        {
+            GenerateSegment(takeFromPool: false); 
+        }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (filters.Peek().transform.localPosition.z < killDistance)
+        {
             GenerateSegment();
+        }
     }
 
-    private void GenerateSegment()
+    private void GenerateSegment(bool takeFromPool = true)
     {
-        MeshFilter filter = Instantiate(filterTemplate, transform);
+        MeshFilter filter = takeFromPool 
+            ? filters.Dequeue()
+            : Instantiate(filterTemplate, transform);
 
         WormholeSettings holeSettings = (WormholeSettings)settings;
         float noiseOffset = noiseStartOffset + holeSettings.NoiseSampleInterval * holeSettings.Length * i;
@@ -45,5 +57,6 @@ public class InfiniteWormholeGenerator : MonoBehaviour
 
         lastTransform = filter.transform;
         i++;
+        filters.Enqueue(filter);
     }
 }
