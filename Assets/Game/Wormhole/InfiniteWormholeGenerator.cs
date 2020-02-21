@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,24 +12,24 @@ public class InfiniteWormholeGenerator : MonoBehaviour
     [SerializeField] private float killDistance = -500;
 
     private Transform lastTransform = null;
-    private WormholeResult lastWormholeResult = new WormholeResult(null, Vector3.zero, Quaternion.identity);
 
     private int seed;
     private float noiseStartOffset;
     private int i;
 
     private Queue<MeshFilter> filters = new Queue<MeshFilter>();
+    List<RingTransform> rings = new List<RingTransform>();
 
     private void Awake()
     {
         i = 0;
-        seed = Random.Range(int.MinValue, int.MaxValue);
-        noiseStartOffset = Random.Range(15f, 125f);
+        seed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
+        noiseStartOffset = UnityEngine.Random.Range(15f, 125f);
 
         lastTransform = transform;
         for (int i = 0; i < meshCount; i++)
         {
-            GenerateSegment(takeFromPool: false); 
+            GenerateSegment(takeFromPool: false);
         }
     }
 
@@ -42,21 +43,34 @@ public class InfiniteWormholeGenerator : MonoBehaviour
 
     private void GenerateSegment(bool takeFromPool = true)
     {
-        MeshFilter filter = takeFromPool 
+        MeshFilter filter = takeFromPool
             ? filters.Dequeue()
             : Instantiate(filterTemplate, transform);
 
         WormholeSettings holeSettings = (WormholeSettings)settings;
         float noiseOffset = noiseStartOffset + holeSettings.NoiseSampleInterval * holeSettings.Length * i;
 
-        filter.transform.localPosition = lastTransform.TransformPoint(lastWormholeResult.LastPos);
+        Vector3 pos = rings.Count > 0
+            ? rings[rings.Count - 1].Pos
+            : Vector3.zero;
 
-        Random.InitState(seed);
-        lastWormholeResult = WormholeMeshGenerator.GetWormhole(holeSettings, noiseOffset, true, lastWormholeResult.LastRot);
-        filter.mesh = lastWormholeResult.Mesh;
+        Quaternion rot = rings.Count > 0
+            ? rings[rings.Count - 1].Rot
+            : Quaternion.identity;
+
+        filter.transform.localPosition = lastTransform.TransformPoint(pos);
+
+        UnityEngine.Random.InitState(seed);
+        WormholeResult wormholeResult = WormholeMeshGenerator.GetWormhole(holeSettings, noiseOffset, true, rot, filter.transform);
+        filter.mesh = wormholeResult.Mesh;
 
         lastTransform = filter.transform;
         i++;
         filters.Enqueue(filter);
+
+        rings.AddRange(wormholeResult.Rings);
+        rings.RemoveAt(rings.Count - holeSettings.Length);
+        if (takeFromPool)
+            rings.RemoveRange(0, holeSettings.Length - 1);
     }
 }
