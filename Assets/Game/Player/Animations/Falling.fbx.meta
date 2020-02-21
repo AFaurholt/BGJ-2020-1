@@ -1,11 +1,14 @@
 fileFormatVersion: 2
-guid: b7fd024000d86a34c939d7e4389d6fb1
+guid: 7dc5044d8a455bd438827554fd42a9b2
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
   - first:
       74: -5981083392549706128
     second: Stickman_Armature|DefaultPose
+  - first:
+      74: -203655887218126122
+    second: mixamo.com
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -21,7 +24,11 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'mixamo.com' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'Shoulder_L' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\t'Shoulder_R' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -368,11 +375,12 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: b7fd024000d86a34c939d7e4389d6fb1,
+    type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   additionalBone: 0
   userData: 
   assetBundleName: 
