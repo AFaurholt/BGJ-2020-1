@@ -1473,6 +1473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parentTransform: {fileID: 1659043883}
+  _ignoreParentRotate: 1
   _rawMouseInput: 0
   _mouseSensitivityX: 5
   _mouseSensitivityY: 5
@@ -1533,8 +1534,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1659043883}
   - component: {fileID: 1659043885}
-  - component: {fileID: 1659043884}
   - component: {fileID: 1659043886}
+  - component: {fileID: 1659043884}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1565,38 +1566,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659043882}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fae49149e5aa78e4e8332b53643dbccc, type: 3}
+  m_Script: {fileID: 11500000, guid: 86749d591409e4e43833a4d5ff268d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 963194227}
-  _cameraPositionFocus: {fileID: 1377806447}
-  _cameraIsOrbiting: 1
-  _camOffsetDistance: 5
-  _camOffsetVector: {x: 0, y: 0, z: 0}
-  _hasCamMoveFactorY: 0
-  _hasCamMoveFactorX: 0
-  _cameraMoveFactorX: 0.2
-  _hasCircleCamPan: 1
-  _circleAngleMultiplier: 0.15
-  _circleRadius: 2
-  _hasRotationY: 1
-  _isYClamped: 1
-  _cameraYMax: 90
-  _cameraYMin: -90
-  _hasRotationX: 0
-  _isXClamped: 0
-  _cameraXMax: 90
-  _cameraXMin: 0
-  _inputs: {x: 0, y: 0, z: 0}
-  _rawMouseInput: 0
-  _mouseSensitivityX: 1
-  _mouseSensitivityY: 1
-  _invertY: 1
-  _invertX: 0
-  _lockCursor: 0
-  _cursorVisible: 0
+  UseInRecordMode: 0
+  CopyTransform: {fileID: 1377806447}
+  IsCopyPosition: 0
+  HasSmoothingPosition: 1
+  SmoothTimePosition: 0.1
+  IsCopyRotation: 1
+  HasSmoothingRotation: 1
+  RotationSpeed: 100
+  CameraOffsetVector3: {x: 0, y: 0, z: 0}
 --- !u!54 &1659043885
 Rigidbody:
   m_ObjectHideFlags: 0

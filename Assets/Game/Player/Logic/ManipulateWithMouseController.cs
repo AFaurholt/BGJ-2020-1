@@ -13,14 +13,15 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
 
         [Header("Mouse")]
         [SerializeField] private Transform _parentTransform = default;
+        [SerializeField] private bool _ignoreParentRotate = true;
         [SerializeField] private bool _rawMouseInput = false;
         [SerializeField] private float _mouseSensitivityX = 1f;
         [SerializeField] private float _mouseSensitivityY = 1f;
         [Space]
         [SerializeField] private List<MouseBehaviour> _editorMouseBehaviourX = new List<MouseBehaviour>();
         [SerializeField] private List<MouseBehaviour> _editorMouseBehaviourY = new List<MouseBehaviour>();
-         private HashSet<MouseBehaviour> _mouseBehaviourX = new HashSet<MouseBehaviour>();
-         private HashSet<MouseBehaviour> _mouseBehaviourY = new HashSet<MouseBehaviour>();
+        private HashSet<MouseBehaviour> _mouseBehaviourX = new HashSet<MouseBehaviour>();
+        private HashSet<MouseBehaviour> _mouseBehaviourY = new HashSet<MouseBehaviour>();
         [Space]
         [SerializeField] private bool _useAlternateScheme = false;
         public Vector3 XVector3 = new Vector3();
@@ -122,7 +123,9 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
             {
                 if (_parentTransform != null)
                 {
-                    transform.SetPositionAndRotation(_parentTransform.position - _targetRotationAndPosition.position, _parentTransform.rotation * _targetRotationAndPosition.rotation);
+                    transform.SetPositionAndRotation(
+                        _parentTransform.position - _targetRotationAndPosition.position,
+                        (_ignoreParentRotate ? _targetRotationAndPosition.rotation : _parentTransform.rotation * _targetRotationAndPosition.rotation));
                 }
                 else
                 {
@@ -153,7 +156,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
 
             if (_isClampingX)
             {
-                _mouseInput.x = Mathf.Clamp(_mouseInput.x, _clampMinX, _clampMaxX); 
+                _mouseInput.x = Mathf.Clamp(_mouseInput.x, _clampMinX, _clampMaxX);
             }
             if (_isClampingY)
             {
