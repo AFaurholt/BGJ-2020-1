@@ -110,8 +110,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
 
             if (_useAlternateScheme)
             {
-                Vector3 euler = _targetRotationAndPosition.rotation.eulerAngles;
-                euler += _mouseInput.x * XVector3 + _mouseInput.y * YVector3;
+                Vector3 euler = _mouseInput.x * XVector3 + _mouseInput.y * YVector3;
                 _targetRotationAndPosition.rotation.eulerAngles = euler;
             }
             else
