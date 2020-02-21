@@ -19,8 +19,9 @@ namespace com.runtime.GameJamBois.BGJ20201.Behaviours
         [Space]
         public bool IsCopyRotation = true;
         public bool HasSmoothingRotation = true;
+        public bool UseLerpInsteadOfRotateTowards = true;
         [Tooltip("Angles per second")]
-        public float RotationSpeed = 100f;
+        public float RotationSpeed = 0.2f;
         [Space]
         public Vector3 CameraOffsetVector3 = new Vector3();
 
@@ -36,17 +37,28 @@ namespace com.runtime.GameJamBois.BGJ20201.Behaviours
         {
             if (IsCopyPosition)
             {
-                Vector3 newPos = HasSmoothingPosition ?
+                Vector3 newPos =
+                    HasSmoothingPosition ?
                     Vector3.SmoothDamp(_rotationAndPosition.position, CopyTransform.position, ref _positionVelocity, SmoothTimePosition) :
                     CopyTransform.position;
-                _rotationAndPosition.position = newPos - CameraOffsetVector3; 
+                _rotationAndPosition.position = newPos - CameraOffsetVector3;
             }
             if (IsCopyRotation)
             {
-                Quaternion newRot = HasSmoothingRotation ?
-                    Quaternion.RotateTowards(_rotationAndPosition.rotation, CopyTransform.rotation, RotationSpeed * Time.deltaTime) :
+                if (UseLerpInsteadOfRotateTowards)
+                {
+                    Quaternion newRot = HasSmoothingRotation ?
+                    Quaternion.Lerp(_rotationAndPosition.rotation, CopyTransform.rotation, RotationSpeed * Time.fixedDeltaTime) :
                     CopyTransform.rotation;
-                _rotationAndPosition.rotation = newRot;
+                    _rotationAndPosition.rotation = newRot;
+                }
+                else
+                {
+                    Quaternion newRot = HasSmoothingRotation ?
+                    Quaternion.RotateTowards(_rotationAndPosition.rotation, CopyTransform.rotation, RotationSpeed * Time.fixedDeltaTime) :
+                    CopyTransform.rotation;
+                    _rotationAndPosition.rotation = newRot;
+                }
             }
             if (!UseInRecordMode)
             {
