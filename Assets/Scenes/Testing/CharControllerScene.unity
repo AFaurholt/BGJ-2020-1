@@ -1478,6 +1478,9 @@ MonoBehaviour:
   _mouseSensitivityY: 5
   _editorMouseBehaviourX: 06000000
   _editorMouseBehaviourY: 04000000
+  _useAlternateScheme: 1
+  XVector3: {x: 0, y: 0, z: 1}
+  YVector3: {x: 1, y: 0, z: 0}
   _orbitTarget: {fileID: 0}
   _isClampingX: 0
   _clampMaxX: 0
