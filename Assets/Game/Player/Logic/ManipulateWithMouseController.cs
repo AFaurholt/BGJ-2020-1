@@ -21,6 +21,11 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
         [SerializeField] private List<MouseBehaviour> _editorMouseBehaviourY = new List<MouseBehaviour>();
          private HashSet<MouseBehaviour> _mouseBehaviourX = new HashSet<MouseBehaviour>();
          private HashSet<MouseBehaviour> _mouseBehaviourY = new HashSet<MouseBehaviour>();
+        [Space]
+        [SerializeField] private bool _useAlternateScheme = false;
+        public Vector3 XVector3 = new Vector3();
+        public Vector3 YVector3 = new Vector3();
+        [Space]
         [Tooltip("Not implemented")]
         [SerializeField] private Transform _orbitTarget = default;
         [Space]
@@ -44,7 +49,6 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
             MouseBehaviour.OrbitX,
             MouseBehaviour.OrbitY,
             MouseBehaviour.OrbitZ };
-
         void Start()
         {
             //cursor settings
@@ -82,7 +86,6 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
                 _targetRotationAndPosition.position = transform.position;
                 _targetRotationAndPosition.rotation = transform.rotation;
             }
-
         }
 
         // Update is called once per frame
@@ -105,7 +108,16 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
 
             ClampAndStoreMouseInput(mouseInput);
 
-            ConvertMouseInputToRotationAndPosition(_mouseInput);
+            if (_useAlternateScheme)
+            {
+                Vector3 euler = _targetRotationAndPosition.rotation.eulerAngles;
+                euler += _mouseInput.x * XVector3 + _mouseInput.y * YVector3;
+                _targetRotationAndPosition.rotation.eulerAngles = euler;
+            }
+            else
+            {
+                ConvertMouseInputToRotationAndPosition(_mouseInput);
+            }
 
             if (!HasOrbitBehaviouer())
             {
