@@ -8,6 +8,6 @@ public class TestingShifter : MonoBehaviour
 
     void Update()
     {
-        OriginShifter.MoveOriginBy(speed * Vector3.forward * Time.deltaTime);       
+        OriginShifter.MoveOriginBy(speed * transform.forward * Time.deltaTime);       
     }
 }

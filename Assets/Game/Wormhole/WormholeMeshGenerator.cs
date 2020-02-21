@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-internal struct RingTransform
+public struct RingTransform
 {
     [SerializeField] private string name;
 

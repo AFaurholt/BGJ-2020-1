@@ -69,4 +69,9 @@ public class InfiniteWormholeGenerator : MonoBehaviour
         if (takeFromPool)
             rings.RemoveRange(0, holeSettings.Length - 1);
     }
+
+    public RingTransform FindNext(float distanceFromZero)
+    {
+        return RingUtils.FindNext(transform.forward * distanceFromZero, transform.forward, rings);
+    }
 }
