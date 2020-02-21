@@ -11,8 +11,6 @@ public class InfiniteWormholeGenerator : MonoBehaviour
     [SerializeField] private int meshCount = 5;
     [SerializeField] private float killDistance = -500;
 
-    private Transform lastTransform = null;
-
     private int seed;
     private float noiseStartOffset;
     private int i;
@@ -26,7 +24,6 @@ public class InfiniteWormholeGenerator : MonoBehaviour
         seed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
         noiseStartOffset = UnityEngine.Random.Range(15f, 125f);
 
-        lastTransform = transform;
         for (int i = 0; i < meshCount; i++)
         {
             GenerateSegment(takeFromPool: false);
@@ -50,21 +47,20 @@ public class InfiniteWormholeGenerator : MonoBehaviour
         WormholeSettings holeSettings = (WormholeSettings)settings;
         float noiseOffset = noiseStartOffset + holeSettings.NoiseSampleInterval * holeSettings.Length * i;
 
-        Vector3 pos = rings.Count > 0
-            ? rings[rings.Count - 1].Pos
+        Vector3 globalPos = rings.Count > 0
+            ? rings[rings.Count - 1].GlobalPos
             : Vector3.zero;
 
         Quaternion rot = rings.Count > 0
             ? rings[rings.Count - 1].Rot
             : Quaternion.identity;
 
-        filter.transform.localPosition = lastTransform.TransformPoint(pos);
+        filter.transform.position = globalPos;
 
         UnityEngine.Random.InitState(seed);
         WormholeResult wormholeResult = WormholeMeshGenerator.GetWormhole(holeSettings, noiseOffset, true, rot, filter.transform);
         filter.mesh = wormholeResult.Mesh;
 
-        lastTransform = filter.transform;
         i++;
         filters.Enqueue(filter);
 
