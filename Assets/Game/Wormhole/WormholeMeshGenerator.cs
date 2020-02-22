@@ -99,28 +99,30 @@ public static class WormholeMeshGenerator
     {
         Vector3[] verts = new Vector3[settings.Resolution * settings.Length];
         Vector3[] normals = new Vector3[verts.Length];
+        Vector2[] uvs = new Vector2[verts.Length];
 
-        List<RingTransform> rings = GetRings(settings, noiseOffset, startFlat, startRotation, parent, verts, normals);
+        List<RingTransform> rings = GetRings(settings, noiseOffset, startFlat, startRotation, parent, verts, normals, uvs);
         int[] tris = BridgeLoops(settings);
 
         Mesh mesh = new Mesh()
         {
             vertices = verts,
             triangles = tris,
-            normals = normals
+            normals = normals,
+            uv = uvs
         };
 
         return new WormholeResult(mesh, rings);
     }
 
-    private static List<RingTransform> GetRings(WormholeSettings settings, float noiseOffset, bool startFlat, Quaternion startRotation, Transform parent, Vector3[] verts, Vector3[] normals)
+    private static List<RingTransform> GetRings(WormholeSettings settings, float noiseOffset, bool startFlat, Quaternion startRotation, Transform parent, Vector3[] verts, Vector3[] normals, Vector2[] uvs)
     {
         switch (settings.Mode)
         {
             case WormholeSettings.RotationMode.AngleFromAxis:
-                return GenerateRingsRelativeToAxis(settings, verts, normals, startFlat, noiseOffset, startRotation, parent);
+                return GenerateRingsRelativeToAxis(settings, verts, normals, uvs, startFlat, noiseOffset, startRotation, parent);
             case WormholeSettings.RotationMode.AnglePerStep:
-                return GenerateRingsRelativeToLast(settings, verts, normals, noiseOffset, parent);
+                return GenerateRingsRelativeToLast(settings, verts, normals, uvs, noiseOffset, parent);
         }
         return null;
     }
@@ -158,7 +160,7 @@ public static class WormholeMeshGenerator
         return tris;
     }
 
-    private static List<RingTransform> GenerateRingsRelativeToAxis(WormholeSettings settings, Vector3[] verts, Vector3[] normals, bool startFlat, float noiseOffset, Quaternion startRotation, Transform parent)
+    private static List<RingTransform> GenerateRingsRelativeToAxis(WormholeSettings settings, Vector3[] verts, Vector3[] normals, Vector2[] uvs, bool startFlat, float noiseOffset, Quaternion startRotation, Transform parent)
     {
         float noisePosition = noiseOffset;
         float xNoiseSeed = Random.Range(-1236f, 21756f);
@@ -185,7 +187,7 @@ public static class WormholeMeshGenerator
             Vector3 randomForward = randomQuaternion * settings.Forward;
             Vector3 randomUp = randomQuaternion * settings.Up;
 
-            FillCircle(settings, currentPosition, randomUp, randomForward, verts, normals, i);
+            FillCircle(settings, currentPosition, randomUp, randomForward, verts, normals, uvs, i);
 
             rings.Add(new RingTransform(currentPosition, randomQuaternion, parent));
 
@@ -195,7 +197,7 @@ public static class WormholeMeshGenerator
         return rings;
     }
 
-    private static List<RingTransform> GenerateRingsRelativeToLast(WormholeSettings settings, Vector3[] verts, Vector3[] normals, float noiseOffset, Transform parent)
+    private static List<RingTransform> GenerateRingsRelativeToLast(WormholeSettings settings, Vector3[] verts, Vector3[] normals, Vector2[] uvs, float noiseOffset, Transform parent)
     {
         float noisePosition = noiseOffset;
         float xNoiseSeed = Random.Range(-1236f, 21756f);
@@ -221,7 +223,7 @@ public static class WormholeMeshGenerator
             currentForward = randomQuaternion * currentForward;
             currentUp = randomQuaternion * currentUp;
 
-            FillCircle(settings, currentPosition, currentUp, currentForward, verts, normals, i);
+            FillCircle(settings, currentPosition, currentUp, currentForward, verts, normals, uvs, i);
 
             rings.Add(new RingTransform(currentPosition, Quaternion.FromToRotation(settings.Forward, currentForward), parent));
 
@@ -231,10 +233,12 @@ public static class WormholeMeshGenerator
         return rings;
     }
 
-    private static void FillCircle(WormholeSettings settings, Vector3 position, Vector3 up, Vector3 forward, Vector3[] verts, Vector3[] normals, int ringID)
+    private static void FillCircle(WormholeSettings settings, Vector3 position, Vector3 up, Vector3 forward, Vector3[] verts, Vector3[] normals, Vector2[] uvs, int ringID)
     {
         Quaternion rotationPerStep = Quaternion.AngleAxis(360f / settings.Resolution, forward);
         int startingIndex = ringID * settings.Resolution;
+
+        float uvStep = 1f / settings.Resolution;
 
         for (int i = 0; i < settings.Resolution; i++)
         {
@@ -242,6 +246,12 @@ public static class WormholeMeshGenerator
 
             verts[currentIndex] = position + up * settings.Radius;
             normals[currentIndex] = -up;
+
+
+            float uvx = uvStep * i;
+            uvx = Mathf.Min(uvx * 2, (uvx - 1) / -1 * 2);
+
+            uvs[currentIndex] = new Vector2(uvx, ringID % 2);
 
             up = rotationPerStep * up;
         }
