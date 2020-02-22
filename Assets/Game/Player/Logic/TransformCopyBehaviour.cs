@@ -50,6 +50,12 @@ namespace com.runtime.GameJamBois.BGJ20201.Behaviours
                     Quaternion newRot = HasSmoothingRotation ?
                     Quaternion.Lerp(_rotationAndPosition.rotation, CopyTransform.rotation, RotationSpeed * Time.fixedDeltaTime) :
                     CopyTransform.rotation;
+
+                    // Makes it only rotate on one axis
+                    Vector3 rotEuler = newRot.eulerAngles;
+                    rotEuler.x = 0;
+                    newRot = Quaternion.Euler(rotEuler);
+
                     _rotationAndPosition.rotation = newRot;
                 }
                 else
