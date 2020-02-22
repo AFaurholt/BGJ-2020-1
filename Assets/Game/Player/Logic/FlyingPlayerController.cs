@@ -10,8 +10,9 @@ public class FlyingPlayerController : MonoBehaviour
     public Vector3 GravityVector3 = new Vector3(0f, 0f, 1f);
     public float MoveForce = 5f;
     [Header("Directions")]
-    public Vector3 UpVector3 = Vector3.up;
-    public Vector3 RightVector3 = Vector3.right;
+    public Vector3 UpVector3;
+    public Vector3 RightVector3;
+    public Transform body;
 
     private Rigidbody _rb;
     private Vector3 _internalVelocity = Vector3.zero;
@@ -34,6 +35,9 @@ public class FlyingPlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
 
+        UpVector3 = body.up;
+        RightVector3 = body.right;
+
         //cache the current controls
         //TODO: refactor to better control scheme
         _controls = _currentKeys.Keys.ToArray();
@@ -45,6 +49,9 @@ public class FlyingPlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        UpVector3 = body.up;
+        RightVector3 = body.right;
+
         Vector3 targetMoveVector = GetMovementVector(_currentKeys, MoveForce);
         _currentMoveVector = Vector3.SmoothDamp(_currentMoveVector, targetMoveVector, ref _internalVelocity, _smoothTime);
         _rb.velocity = GravityVector3 + _currentMoveVector;
