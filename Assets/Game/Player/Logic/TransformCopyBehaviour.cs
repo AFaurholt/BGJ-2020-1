@@ -20,12 +20,14 @@ namespace com.runtime.GameJamBois.BGJ20201.Behaviours
         public bool IsCopyRotation = true;
         public bool HasSmoothingRotation = true;
         public bool UseLerpInsteadOfRotateTowards = true;
+        public bool IgnoreVerticalRotate = true;
         [Tooltip("Angles per second")]
         public float RotationSpeed = 0.2f;
         [Space]
         public Vector3 CameraOffsetVector3 = new Vector3();
 
         private RotationAndPosition _rotationAndPosition = new RotationAndPosition(new Quaternion(), new Vector3());
+        [SerializeField] private Vector3 _rotateOn = new Vector3(1, 1, 1);
 
         private void Start()
         {
@@ -45,17 +47,22 @@ namespace com.runtime.GameJamBois.BGJ20201.Behaviours
             }
             if (IsCopyRotation)
             {
+                Vector3 copyEuler = CopyTransform.rotation.eulerAngles;
+                copyEuler.Scale(_rotateOn);
+
+                Quaternion copyQ = Quaternion.Euler(copyEuler);
+
                 if (UseLerpInsteadOfRotateTowards)
                 {
                     Quaternion newRot = HasSmoothingRotation ?
-                    Quaternion.Lerp(_rotationAndPosition.rotation, CopyTransform.rotation, RotationSpeed * Time.fixedDeltaTime) :
+                    Quaternion.Lerp(_rotationAndPosition.rotation, copyQ, RotationSpeed * Time.fixedDeltaTime) :
                     CopyTransform.rotation;
                     _rotationAndPosition.rotation = newRot;
                 }
                 else
                 {
                     Quaternion newRot = HasSmoothingRotation ?
-                    Quaternion.RotateTowards(_rotationAndPosition.rotation, CopyTransform.rotation, RotationSpeed * Time.fixedDeltaTime) :
+                    Quaternion.RotateTowards(_rotationAndPosition.rotation, copyQ, RotationSpeed * Time.fixedDeltaTime) :
                     CopyTransform.rotation;
                     _rotationAndPosition.rotation = newRot;
                 }

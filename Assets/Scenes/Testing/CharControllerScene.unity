@@ -661,8 +661,10 @@ MonoBehaviour:
   IsCopyRotation: 1
   HasSmoothingRotation: 1
   UseLerpInsteadOfRotateTowards: 1
+  IgnoreVerticalRotate: 1
   RotationSpeed: 5
   CameraOffsetVector3: {x: 0, y: 0, z: 0}
+  _rotateOn: {x: 0, y: 1, z: 1}
 --- !u!23 &836836873
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1791,8 +1793,10 @@ MonoBehaviour:
   IsCopyRotation: 1
   HasSmoothingRotation: 0
   UseLerpInsteadOfRotateTowards: 0
+  IgnoreVerticalRotate: 1
   RotationSpeed: 100
   CameraOffsetVector3: {x: 0, y: 0, z: 0}
+  _rotateOn: {x: 1, y: 1, z: 1}
 --- !u!4 &2041088706
 Transform:
   m_ObjectHideFlags: 0
