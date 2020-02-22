@@ -28,11 +28,13 @@ namespace com.runtime.GameJamBois.BGJ20201.Behaviours
 
         private RotationAndPosition _rotationAndPosition = new RotationAndPosition(new Quaternion(), new Vector3());
         [SerializeField] private Vector3 _rotateOn = new Vector3(1, 1, 1);
+        private Quaternion _initRotation = default;
 
         private void Start()
         {
             _rotationAndPosition.position = transform.position;
             _rotationAndPosition.rotation = transform.rotation;
+            _initRotation = transform.rotation;
         }
 
         private void FixedUpdate()
@@ -51,6 +53,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Behaviours
                 copyEuler.Scale(_rotateOn);
 
                 Quaternion copyQ = Quaternion.Euler(copyEuler);
+                copyQ = copyQ * _initRotation;
 
                 if (UseLerpInsteadOfRotateTowards)
                 {
