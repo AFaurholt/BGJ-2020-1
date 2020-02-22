@@ -68,32 +68,50 @@ public class FlyingPlayerController : MonoBehaviour
     /// </summary>
     Vector3 GetMovementVector(IDictionary<KeyCode, bool> currentKeys, float movementForce)
     {
+        UpdateInternalRotation();
         Vector3 vector = new Vector3();
         foreach (var item in currentKeys)
         {
             if (item.Value)
             {
-                switch (item.Key)
+                if (MoveRelativeToRotation)
                 {
-                    case KeyCode.W:
-                        vector += UpVector3 * movementForce;
-                        break;
-                    case KeyCode.A:
-                        vector += -RightVector3 * movementForce;
-                        break;
-                    case KeyCode.S:
-                        vector += -UpVector3 * movementForce;
-                        break;
-                    case KeyCode.D:
-                        vector += RightVector3 * movementForce;
-                        break;
+                    switch (item.Key)
+                    {
+                        case KeyCode.W:
+                            vector += CopyTransform.up * movementForce;
+                            break;
+                        case KeyCode.A:
+                            vector += -CopyTransform.right * movementForce;
+                            break;
+                        case KeyCode.S:
+                            vector += -CopyTransform.up * movementForce;
+                            break;
+                        case KeyCode.D:
+                            vector += CopyTransform.right * movementForce;
+                            break;
+                    }
                 }
+                else
+                {
+                    switch (item.Key)
+                    {
+                        case KeyCode.W:
+                            vector += UpVector3 * movementForce;
+                            break;
+                        case KeyCode.A:
+                            vector += -RightVector3 * movementForce;
+                            break;
+                        case KeyCode.S:
+                            vector += -UpVector3 * movementForce;
+                            break;
+                        case KeyCode.D:
+                            vector += RightVector3 * movementForce;
+                            break;
+                    }
+                }
+
             }
-        }
-        if (MoveRelativeToRotation)
-        {
-            UpdateInternalRotation();
-            vector = _internalRotation * vector;
         }
         return vector;
     }
