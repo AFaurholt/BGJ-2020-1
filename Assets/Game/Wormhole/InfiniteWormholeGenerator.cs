@@ -69,25 +69,9 @@ public class InfiniteWormholeGenerator : MonoBehaviour
 
         for (int i = 0; i < wormholeResult.Rings.Count - 1; i++)
         {
-            Transform colliderTransform = null;
-            if (!takeFromPool)
-            {
-                CapsuleCollider collider = new GameObject().AddComponent<CapsuleCollider>();
-                collider.radius = holeSettings.Radius;
-                collider.height = holeSettings.RingDistanceMultiplier + collider.radius * 2;
-                collider.center = Vector3.forward * holeSettings.RingDistanceMultiplier / 2;
-                collider.direction = 2;
-
-                colliderTransform = collider.transform;
-                colliders.Enqueue(collider);
-            }
-            else
-            {
-                CapsuleCollider collider = colliders.Dequeue();
-                colliders.Enqueue(collider);
-
-                colliderTransform = collider.transform;
-            }
+            Transform colliderTransform = takeFromPool
+                ? GetCapsuleFromPool().transform
+                : CreateNewCapsule(holeSettings).transform;
 
             colliderTransform.parent = filter.transform;
             RingTransform ring = wormholeResult.Rings[i];
@@ -100,6 +84,27 @@ public class InfiniteWormholeGenerator : MonoBehaviour
 
         if (takeFromPool)
             rings.RemoveRange(0, holeSettings.Length - 1);
+    }
+
+    private CapsuleCollider GetCapsuleFromPool()
+    {
+        CapsuleCollider collider = colliders.Dequeue();
+        colliders.Enqueue(collider);
+        return collider;
+    }
+
+    private CapsuleCollider CreateNewCapsule(WormholeSettings holeSettings)
+    {
+        CapsuleCollider collider = new GameObject().AddComponent<CapsuleCollider>();
+        collider.radius = holeSettings.Radius;
+        collider.height = holeSettings.RingDistanceMultiplier + collider.radius * 2;
+        collider.center = Vector3.forward * holeSettings.RingDistanceMultiplier / 2;
+        collider.direction = 2;
+        collider.isTrigger = true;
+        collider.tag = "Wormhole";
+
+        colliders.Enqueue(collider);
+        return collider;
     }
 
     public RingTransform FindNext(float distanceFromZero)
