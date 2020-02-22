@@ -9,13 +9,19 @@ public class FlyingPlayerController : MonoBehaviour
     [Header("Forces")]
     public Vector3 GravityVector3 = new Vector3(0f, 0f, 1f);
     public float MoveForce = 5f;
+
     [Header("Directions")]
     public Vector3 UpVector3 = Vector3.up;
     public Vector3 RightVector3 = Vector3.right;
+    [Header("Rotations")]
+    public Transform CopyTransform = default;
+    public bool MoveRelativeToRotation = true;
+    [Space]
 
     private Rigidbody _rb;
     private Vector3 _internalVelocity = Vector3.zero;
     private Vector3 _currentMoveVector = new Vector3();
+    private Quaternion _internalRotation = new Quaternion();
     [SerializeField] private float _smoothTime = 0.1f;
 
     //the currently held keys
@@ -37,6 +43,11 @@ public class FlyingPlayerController : MonoBehaviour
         //cache the current controls
         //TODO: refactor to better control scheme
         _controls = _currentKeys.Keys.ToArray();
+
+        if (MoveRelativeToRotation)
+        {
+            _internalRotation = CopyTransform.localRotation;
+        }
     }
     private void Update()
     {
@@ -47,7 +58,9 @@ public class FlyingPlayerController : MonoBehaviour
     {
         Vector3 targetMoveVector = GetMovementVector(_currentKeys, MoveForce);
         _currentMoveVector = Vector3.SmoothDamp(_currentMoveVector, targetMoveVector, ref _internalVelocity, _smoothTime);
-        _rb.velocity = GravityVector3 + _currentMoveVector;
+        targetMoveVector = GravityVector3 + _currentMoveVector;
+
+        OriginShifter.MoveOriginBy(targetMoveVector * Time.fixedDeltaTime);
     }
 
     /// <summary>
@@ -77,6 +90,16 @@ public class FlyingPlayerController : MonoBehaviour
                 }
             }
         }
+        if (MoveRelativeToRotation)
+        {
+            UpdateInternalRotation();
+            vector = _internalRotation * vector;
+        }
         return vector;
+    }
+
+    void UpdateInternalRotation()
+    {
+        _internalRotation = CopyTransform.localRotation;
     }
 }
