@@ -24,6 +24,9 @@ public class FlyingPlayerController : MonoBehaviour
     private Quaternion _internalRotation = new Quaternion();
     [SerializeField] private float _smoothTime = 0.1f;
 
+    [SerializeField] Animator anim;
+    [SerializeField] float animSpeed;
+
     //the currently held keys
     //TODO: refactor better input system
     private IDictionary<KeyCode, bool> _currentKeys = new Dictionary<KeyCode, bool>()
@@ -53,6 +56,9 @@ public class FlyingPlayerController : MonoBehaviour
     {
         //movement
         _currentKeys = InputUtil.GetIfKeysHeld(_controls);
+
+        UpdateAnimator();
+        
     }
     private void FixedUpdate()
     {
@@ -61,6 +67,41 @@ public class FlyingPlayerController : MonoBehaviour
         targetMoveVector = GravityVector3 + _currentMoveVector;
 
         OriginShifter.MoveOriginBy(targetMoveVector * Time.fixedDeltaTime);
+    }
+
+    void UpdateAnimator()
+    {
+        float x = 0;
+        float y = 0;
+        if(anim == null)
+        {
+            Debug.LogError("boi gotta set that animator");
+            return;
+        }
+        foreach (var i in _currentKeys)
+        {
+            if(i.Value)
+            {
+                switch (i.Key)
+                {
+                    case KeyCode.W:
+                        y += 1;
+                        break;
+                    case KeyCode.A:
+                        x -= 1;
+                        break;
+                    case KeyCode.S:
+                        y -= 1;
+                        break;
+                    case KeyCode.D:
+                        x += 1;
+                        break;
+                }
+            }
+        }
+
+        anim.SetFloat("X", Mathf.Lerp(anim.GetFloat("X"), x, animSpeed));
+        anim.SetFloat("Y", Mathf.Lerp(anim.GetFloat("Y"), y, animSpeed));
     }
 
     /// <summary>

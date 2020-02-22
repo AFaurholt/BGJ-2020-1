@@ -30,6 +30,11 @@ namespace com.runtime.GameJamBois.BGJ20201.Behaviours
         [SerializeField] private Vector3 _rotateOn = new Vector3(1, 1, 1);
         private Quaternion _initRotation = default;
 
+        [SerializeField] Animator anim;
+        [SerializeField] float animRotSensibility;
+        [SerializeField] float animRotMaxSens;
+        [SerializeField] float animSpeed;
+
         private void Start()
         {
             _rotationAndPosition.position = transform.position;
@@ -57,6 +62,22 @@ namespace com.runtime.GameJamBois.BGJ20201.Behaviours
 
                 if (UseLerpInsteadOfRotateTowards)
                 {
+
+                    if(anim != null)
+                    {
+                        float angleB = copyQ.eulerAngles.y;
+                        float angleA = _rotationAndPosition.rotation.eulerAngles.y;
+                        float val = Mathf.DeltaAngle(angleA, angleB);
+                        if (Mathf.Abs(val) < animRotSensibility){
+                            val = 0;
+                        }
+                        else
+                        {
+                            val /= animRotMaxSens;
+                        }
+                        anim.SetFloat("CWRot", Mathf.Lerp(anim.GetFloat("CWRot"), val, animSpeed));
+                    }
+
                     Quaternion newRot = HasSmoothingRotation ?
                     Quaternion.Lerp(_rotationAndPosition.rotation, copyQ, RotationSpeed * Time.fixedDeltaTime) :
                     CopyTransform.rotation;
