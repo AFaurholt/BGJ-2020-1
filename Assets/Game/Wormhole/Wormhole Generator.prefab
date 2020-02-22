@@ -51,7 +51,7 @@ MonoBehaviour:
     ringLength: 31
     ringRadius: 15
     rotationMode: 0
-    maxRandomAngle: 30
+    maxRandomAngle: 50
     noiseVariation: 0.04
   meshCount: 2
   killDistance: -700

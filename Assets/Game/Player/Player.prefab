@@ -372,11 +372,11 @@ MonoBehaviour:
   _clampMaxX: 0
   _clampMinX: 0
   _isClampingY: 1
-  _clampMaxY: 89
-  _clampMinY: -30
+  _clampMaxY: 50
+  _clampMinY: -17
   _invertY: 0
   _invertX: 0
-  _lockCursor: 0
+  _lockCursor: 1
   _cursorVisible: 0
 --- !u!1 &7706629832402297653
 GameObject:
