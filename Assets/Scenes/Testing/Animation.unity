@@ -1031,26 +1031,6 @@ MonoBehaviour:
   offsetOlderRotation: 0
   offsetOlderPosition: 0
   offsetParent: {fileID: 0}
---- !u!1 &1580019784 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9065906238872704453, guid: b7fd024000d86a34c939d7e4389d6fb1,
-    type: 3}
-  m_PrefabInstance: {fileID: 891402478}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &1580019786
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1580019784}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.015
-  m_Height: 0.07428171
-  m_Direction: 1
-  m_Center: {x: 6.8176124e-23, y: 0.022255933, z: 1.2781357e-16}
 --- !u!1 &1734331545 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3279104076272271309, guid: b7fd024000d86a34c939d7e4389d6fb1,
