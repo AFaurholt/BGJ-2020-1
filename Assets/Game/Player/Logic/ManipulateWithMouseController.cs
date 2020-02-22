@@ -80,12 +80,12 @@ namespace com.runtime.GameJamBois.BGJ20201.Controllers
             if (_parentTransform != null)
             {
                 _targetRotationAndPosition.position = _parentTransform.position - transform.position;
-                _targetRotationAndPosition.rotation = _parentTransform.rotation * transform.rotation;
+                _targetRotationAndPosition.rotation = _parentTransform.localRotation * transform.rotation;
             }
             else
             {
                 _targetRotationAndPosition.position = transform.position;
-                _targetRotationAndPosition.rotation = transform.rotation;
+                _targetRotationAndPosition.rotation = transform.localRotation;
             }
         }
 
