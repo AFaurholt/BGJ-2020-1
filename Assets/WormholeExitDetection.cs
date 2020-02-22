@@ -24,7 +24,9 @@ public class WormholeExitDetection : MonoBehaviour
             counter--;
             if (counter == 0)
             {
-                exitedWormhole.Invoke();
+                if(exitedWormhole != null)
+                    exitedWormhole.Invoke();
+                GetComponent<GibbingScript>().Gib();
             }
         }
     }
