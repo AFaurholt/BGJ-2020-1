@@ -7,29 +7,10 @@ public class GibbingScript : MonoBehaviour
 
     //public LayerMask mask;
     public Animator anim;
+    public bool isGameOverScript = false;
 
-    private void Start()
-    {
-        //Gib();
-    }
+    public event System.Action GibbedToDeath;
 
-    private void Update()
-    {
-        
-    }
-    /*
-    private void OnCollisionEnter(Collision collision)
-    {
-        Gib();
-        Debug.Log("hello");
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        Gib();
-        Debug.Log("hello");
-        Debug.Log(other.gameObject);
-    }
-    */
     public void Gib()
     {
         Vector3 v = transform.position;
@@ -47,5 +28,8 @@ public class GibbingScript : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.isKinematic = false;
         rb. AddForce(new Vector3(Random.Range(-10,10), Random.Range(-10, 10), Random.Range(-10, 10)), ForceMode.Impulse);
+
+        if(isGameOverScript)
+            GibbedToDeath?.Invoke();
     }
 }

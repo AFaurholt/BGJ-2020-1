@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7833292793125105239}
+  isGameOverScript: 0
 --- !u!1 &552366066037833553
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,6 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7833292793125105239}
+  isGameOverScript: 0
 --- !u!1 &634908137311256877
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,6 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7833292793125105239}
+  isGameOverScript: 0
 --- !u!1 &1800106090931221970
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,6 +534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7833292793125105239}
+  isGameOverScript: 0
 --- !u!1 &2828663457855801537
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7833292793125105239}
+  isGameOverScript: 0
 --- !u!1 &3304735576877756908
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,6 +842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7833292793125105239}
+  isGameOverScript: 0
 --- !u!1 &3400976141697013022
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,6 +922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7833292793125105239}
+  isGameOverScript: 0
 --- !u!1 &3549719906488994434
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,6 +1025,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7833292793125105239}
+  isGameOverScript: 0
 --- !u!1 &3775186727583035710
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,6 +1209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7833292793125105239}
+  isGameOverScript: 1
 --- !u!1 &4221373637968870898
 GameObject:
   m_ObjectHideFlags: 0
@@ -1278,6 +1287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7833292793125105239}
+  isGameOverScript: 0
 --- !u!1 &4620976435120610453
 GameObject:
   m_ObjectHideFlags: 0
@@ -1380,6 +1390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7833292793125105239}
+  isGameOverScript: 0
 --- !u!1 &4669216846737110263
 GameObject:
   m_ObjectHideFlags: 0
@@ -1482,6 +1493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7833292793125105239}
+  isGameOverScript: 0
 --- !u!1 &4713750394687809812
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,6 +1596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7833292793125105239}
+  isGameOverScript: 0
 --- !u!1 &5187231467367556899
 GameObject:
   m_ObjectHideFlags: 0
@@ -1685,6 +1698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7833292793125105239}
+  isGameOverScript: 0
 --- !u!1 &5748283058901651369
 GameObject:
   m_ObjectHideFlags: 0
@@ -1864,6 +1878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7833292793125105239}
+  isGameOverScript: 0
 --- !u!1 &7049843715697170989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1997,6 +2012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7833292793125105239}
+  isGameOverScript: 0
 --- !u!1001 &1167873359529306679
 PrefabInstance:
   m_ObjectHideFlags: 0
