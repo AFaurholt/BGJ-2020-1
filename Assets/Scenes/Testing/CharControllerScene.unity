@@ -1623,10 +1623,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GravityVector3: {x: 0, y: 0, z: 0}
-  MoveForce: 5
+  MoveForce: 10
   UpVector3: {x: 0, y: 1, z: 0}
   RightVector3: {x: 1, y: 0, z: 0}
-  _smoothTime: 0.1
+  CopyTransform: {fileID: 836836871}
+  MoveRelativeToRotation: 1
+  _smoothTime: 0.2
 --- !u!1 &1782414246
 GameObject:
   m_ObjectHideFlags: 0
