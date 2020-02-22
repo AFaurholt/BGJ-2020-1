@@ -59,14 +59,23 @@ public class FlyingPlayerController : MonoBehaviour
 
         UpdateAnimator();
         
+        Vector3 targetMoveVector = GetMovementVector(_currentKeys, MoveForce);
+        _currentMoveVector = Vector3.SmoothDamp(_currentMoveVector, targetMoveVector, ref _internalVelocity, _smoothTime);
+        targetMoveVector = GravityVector3 + _currentMoveVector;
+
+        OriginShifter.MoveOriginBy(targetMoveVector * Time.deltaTime);
+        
+
     }
     private void FixedUpdate()
     {
+        /*
         Vector3 targetMoveVector = GetMovementVector(_currentKeys, MoveForce);
         _currentMoveVector = Vector3.SmoothDamp(_currentMoveVector, targetMoveVector, ref _internalVelocity, _smoothTime);
         targetMoveVector = GravityVector3 + _currentMoveVector;
 
         OriginShifter.MoveOriginBy(targetMoveVector * Time.fixedDeltaTime);
+        */
     }
 
     void UpdateAnimator()

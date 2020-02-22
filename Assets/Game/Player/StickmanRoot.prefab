@@ -554,11 +554,6 @@ PrefabInstance:
       propertyPath: offsetParent
       value: 
       objectReference: {fileID: 5766143920542091397}
-    - target: {fileID: 5135727853915971965, guid: 3759c07d4c923384883d4767019a764a,
-        type: 3}
-      propertyPath: startEnabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3759c07d4c923384883d4767019a764a, type: 3}
 --- !u!4 &5925053565823750798 stripped

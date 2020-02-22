@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GravityVector3: {x: 0, y: 0, z: 0}
-  MoveForce: 10
+  MoveForce: 30
   UpVector3: {x: 0, y: 0, z: 1}
   RightVector3: {x: 1, y: 0, z: 0}
   CopyTransform: {fileID: 7706629832402297652}
@@ -584,11 +584,6 @@ PrefabInstance:
         type: 3}
       propertyPath: noiseScripts.Array.size
       value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 1675532703948501214, guid: 05b30753bfcb18f499e7e9009922098b,
-        type: 3}
-      propertyPath: startEnabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1675532703948501214, guid: 05b30753bfcb18f499e7e9009922098b,
         type: 3}

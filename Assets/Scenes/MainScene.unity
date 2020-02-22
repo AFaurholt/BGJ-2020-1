@@ -347,26 +347,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wormhole Generator
       objectReference: {fileID: 0}
-    - target: {fileID: 7063650275506640959, guid: d1f117962ff7b4444a7b7a55e8b59637,
-        type: 3}
-      propertyPath: settings.ringRadius
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7063650275506640959, guid: d1f117962ff7b4444a7b7a55e8b59637,
-        type: 3}
-      propertyPath: settings.ringAmount
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7063650275506640959, guid: d1f117962ff7b4444a7b7a55e8b59637,
-        type: 3}
-      propertyPath: meshCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7063650275506640959, guid: d1f117962ff7b4444a7b7a55e8b59637,
-        type: 3}
-      propertyPath: killDistance
-      value: -700
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1f117962ff7b4444a7b7a55e8b59637, type: 3}
 --- !u!1 &544282478
@@ -1304,6 +1284,11 @@ PrefabInstance:
       propertyPath: m_WarningMessage
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6215939534359443173, guid: 8c101ea1cb3eff94284c3d20c97fc940,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7185637532145866075, guid: 8c101ea1cb3eff94284c3d20c97fc940,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -1369,6 +1354,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.y
       value: -0.00000022351739
       objectReference: {fileID: 0}
+    - target: {fileID: 7706629831459207155, guid: 8c101ea1cb3eff94284c3d20c97fc940,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7706629831546797336, guid: 8c101ea1cb3eff94284c3d20c97fc940,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1433,6 +1423,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706629831546797341, guid: 8c101ea1cb3eff94284c3d20c97fc940,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706629831546797341, guid: 8c101ea1cb3eff94284c3d20c97fc940,
+        type: 3}
+      propertyPath: _smoothTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706629831806080323, guid: 8c101ea1cb3eff94284c3d20c97fc940,
+        type: 3}
+      propertyPath: _isClampingY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706629831806080323, guid: 8c101ea1cb3eff94284c3d20c97fc940,
+        type: 3}
+      propertyPath: _ignoreParentRotate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706629831806080323, guid: 8c101ea1cb3eff94284c3d20c97fc940,
+        type: 3}
+      propertyPath: _lockCursor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706629831806080349, guid: 8c101ea1cb3eff94284c3d20c97fc940,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706629832402297659, guid: 8c101ea1cb3eff94284c3d20c97fc940,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7781387594139665110, guid: 8c101ea1cb3eff94284c3d20c97fc940,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7976848848006381818, guid: 8c101ea1cb3eff94284c3d20c97fc940,
         type: 3}
@@ -1944,7 +1974,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1497387327}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 6.6085587, z: 0.29767227}
+  m_LocalPosition: {x: 0, y: 6.608557, z: 0.29767275}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
