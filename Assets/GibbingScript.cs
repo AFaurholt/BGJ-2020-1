@@ -17,7 +17,7 @@ public class GibbingScript : MonoBehaviour
     {
         
     }
-
+    /*
     private void OnCollisionEnter(Collision collision)
     {
         Gib();
@@ -27,9 +27,10 @@ public class GibbingScript : MonoBehaviour
     {
         Gib();
         Debug.Log("hello");
+        Debug.Log(other.gameObject);
     }
-
-    void Gib()
+    */
+    public void Gib()
     {
         Vector3 v = transform.position;
         gameObject.transform.parent = null;
