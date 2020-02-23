@@ -8,19 +8,22 @@ using UnityEditor;
 #endif
 public static class SceneUtils
 {
+    static bool initialized = false;
     public static event Action<string> SceneLoaded;
   
     static SceneUtils()
     {
-        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
-        Debug.Log("sceneutils constructor");
+        Init();
     }
 
-    [UnityEngine.RuntimeInitializeOnLoadMethod]
+    [UnityEngine.RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void Init()
     {
+        if (initialized)
+            return;
+
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
-        Debug.Log("init");
+        initialized = true;
     }
 
     private static void SceneManager_sceneLoaded(Scene scene, LoadSceneMode _)
@@ -30,7 +33,6 @@ public static class SceneUtils
 
     public static void MakeSureSceneIsLoaded(string name, bool active = false)
     {
-        Debug.Log("makeSureSceneIsLoaded: "+name);
         Scene scene = SceneManager.GetSceneByName(name);
         if (scene.IsValid())
         {
@@ -56,13 +58,11 @@ public static class SceneUtils
 
             SceneManager.SetActiveScene(loadedScene);
             SceneManager.sceneLoaded -= SetSceneActive;
-            Debug.Log("SetSceneActive:" + loadedScene);
         }
     }
 
     public static void ReloadScene(string name, bool active = false)
     {
-        Debug.Log("Reload Scene: " + name);
         Scene scene = SceneManager.GetSceneByName(name);
         if (scene.IsValid())
         {
@@ -87,12 +87,10 @@ public static class SceneUtils
 
     public static void UnloadSceneIfExists(string name)
     {
-        Debug.Log("Unload scene: " + name);
         Scene scene = SceneManager.GetSceneByName(name);
         if (scene.IsValid())
         {
             SceneManager.UnloadSceneAsync(scene);
-            Debug.Log("scene unload valid: " + name);
         }
     }
 }

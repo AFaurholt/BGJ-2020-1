@@ -1,4 +1,6 @@
 ﻿using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +17,7 @@ public class GameDirector : MonoBehaviour
     [SerializeField] private string GameOverScene = "GameOver";
 
     private float currentDistance = 0;
+    private TweenerCore<float, float, FloatOptions> timeTween;
 
     // Start is called before the first frame update
     void Awake()
@@ -50,10 +53,16 @@ public class GameDirector : MonoBehaviour
     }
 
     // ========================== Actions     ==========================
+    private void ResetTime()
+    {
+        timeTween.Kill();
+        Time.timeScale = 1;
+    }
+
     private void StartGame()
     {
         currentDistance = 0;
-        Time.timeScale = 1;
+        ResetTime();
         SceneUtils.UnloadSceneIfExists(MenuScene);
 
         GameContext ctx = GameContext.Current;
@@ -65,7 +74,7 @@ public class GameDirector : MonoBehaviour
 
     private void GoToMenu()
     {
-        Time.timeScale = 1;
+        ResetTime();
         SceneUtils.MakeSureSceneIsLoaded(MenuScene);
         SceneUtils.UnloadSceneIfExists(GameOverScene);
         SceneUtils.UnloadSceneIfExists(GameScene);
@@ -92,7 +101,7 @@ public class GameDirector : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             GameContext.Current.CameraController.enabled = false;
-            DOTween.To(() => Time.timeScale, v => Time.timeScale = v, 0.2f, 0.8f).SetUpdate(true);
+            timeTween = DOTween.To(() => Time.timeScale, v => Time.timeScale = v, 0.2f, 0.8f).SetUpdate(true);
 
             SceneUtils.MakeSureSceneIsLoaded(GameOverScene);
             yield return null;
@@ -103,7 +112,7 @@ public class GameDirector : MonoBehaviour
 
     private void Restart()
     {
-        Time.timeScale = 1;
+        ResetTime();
         StartCoroutine(Restart_C());
 
         IEnumerator Restart_C()
@@ -129,8 +138,7 @@ public class GameDirector : MonoBehaviour
     private void BindGameOver()
     {
         GameOverContext.Current.RestartButton.onClick.AddListener(Restart);
-        //GameOverContext.Current.MenuButton.onClick.AddListener(GoToMenu);
-        GameOverContext.Current.MenuButton.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene("START SCENE"));
+        GameOverContext.Current.MenuButton.onClick.AddListener(GoToMenu);
     }
 
     // ========================== Utils       ==========================
