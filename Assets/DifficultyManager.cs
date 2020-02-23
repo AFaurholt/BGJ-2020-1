@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DifficultyManager : MonoBehaviour
 {
+    [SerializeField] PositionProvider spawnPosition;
     [SerializeField] bool hasBegun = false;
 
     public float maxDifficulty = 100;
@@ -16,7 +17,6 @@ public class DifficultyManager : MonoBehaviour
     public List<GameObject> obstacleList;
     public List<GameObject> obstacles;
 
-    public Transform spawnTransform;
     public Transform playerTransform;
 
     [SerializeField] Vector3 oCheckV3;
@@ -25,7 +25,7 @@ public class DifficultyManager : MonoBehaviour
     void Start()
     {
         ResetDifficulty();
-        BeginDifficulty(); //comment later on
+        //BeginDifficulty(); //comment later on
     }
 
     public void BeginDifficulty()
@@ -80,7 +80,7 @@ public class DifficultyManager : MonoBehaviour
 
         if (chanceToSpawn > r)
         {
-            //SpawnObstacle();
+            SpawnObstacle();
         }
 
     }
@@ -88,7 +88,7 @@ public class DifficultyManager : MonoBehaviour
     public void SpawnObstacle()
     {
         int r = Random.Range(0, obstacleList.Count);
-        GameObject go = Instantiate(obstacleList[r], spawnTransform);
+        GameObject go = Instantiate(obstacleList[r], spawnPosition.Get(), Quaternion.identity);
         obstacles.Add(go);
         // extra stuff like giving them speed
     }

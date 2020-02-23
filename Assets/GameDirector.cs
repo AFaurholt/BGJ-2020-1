@@ -60,6 +60,7 @@ public class GameDirector : MonoBehaviour
 
         ctx.IntroDirector.Play();
         ctx.HeadGibber.GibbedToDeath += GameOver;
+        ctx.DifficultyManager.BeginDifficulty();
     }
 
     private void GoToMenu()
