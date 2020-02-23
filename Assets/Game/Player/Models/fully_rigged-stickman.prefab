@@ -1099,8 +1099,8 @@ MonoBehaviour:
   rotationMagnitude: 40
   rotationResolution: 1000
   rotationDampening: 0
-  positionMagnitude: 0.35
-  positionResolution: 1200
+  positionMagnitude: 12
+  positionResolution: 1500
   positionDampening: 0
   offsetOlderRotation: 0
   offsetOlderPosition: 1
