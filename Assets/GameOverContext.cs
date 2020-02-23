@@ -7,4 +7,6 @@ public class GameOverContext : Context<GameOverContext>
 {
     public Button RestartButton;
     public Button MenuButton;
+
+    public TMPro.TextMeshProUGUI GameOverText;
 }

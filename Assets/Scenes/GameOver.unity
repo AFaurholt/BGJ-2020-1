@@ -167,7 +167,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -141.5}
+  m_AnchoredPosition: {x: 0, y: -60}
   m_SizeDelta: {x: 0, y: 140}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &295416185
@@ -192,10 +192,15 @@ MonoBehaviour:
 
     <SIZE=55%>BUT YOU SURVIVED
 
-    <b><color=white>126
-    367</color></b>
+    <b><color=white>{0}</color></b>
+    m
 
-    METERS'
+    <size=20%>
+
+    </size>CURRENT HIGHSCORE IS
+
+    <b><color=white>{1}</color></b>
+    m'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -264,12 +269,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 295416185}
-    characterCount: 49
+    characterCount: 68
     spriteCount: 0
-    spaceCount: 9
-    wordCount: 10
+    spaceCount: 14
+    wordCount: 14
     linkCount: 0
-    lineCount: 4
+    lineCount: 6
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -867,3 +872,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RestartButton: {fileID: 1031278908}
   MenuButton: {fileID: 257237532}
+  GameOverText: {fileID: 295416185}
