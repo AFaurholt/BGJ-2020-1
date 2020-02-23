@@ -120,9 +120,9 @@ public class NoiseTransform : MonoBehaviour{
         }
 
         if (!offsetOlderPosition)
-            target.position += position;
+            target.position += position * Time.fixedDeltaTime;
         else
-            target.position = storedPosition + position;
+            target.position = storedPosition + position * Time.fixedDeltaTime;
     }
 
     void rotateNoise()

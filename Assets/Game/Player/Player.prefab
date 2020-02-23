@@ -306,14 +306,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GravityVector3: {x: 0, y: 0, z: 0}
-  MoveForce: 30
+  MoveForce: 37
   UpVector3: {x: 0, y: 0, z: 1}
   RightVector3: {x: 1, y: 0, z: 0}
   CopyTransform: {fileID: 7706629832402297652}
   MoveRelativeToRotation: 1
   _smoothTime: 0.2
   anim: {fileID: 6215939534359443173}
-  animSpeed: 0.07
+  animSpeed: 0.1
 --- !u!1 &7706629831806080349
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +377,7 @@ MonoBehaviour:
   _invertY: 0
   _invertX: 0
   _lockCursor: 1
-  _cursorVisible: 0
+  _cursorVisible: 1
 --- !u!1 &7706629832402297653
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +437,7 @@ MonoBehaviour:
   anim: {fileID: 6215939534359443173}
   animRotSensibility: 0
   animRotMaxSens: 60
-  animSpeed: 0.2
+  animSpeed: 0.5
 --- !u!1001 &7706629833191557393
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -75,7 +75,7 @@ namespace com.runtime.GameJamBois.BGJ20201.Behaviours
                         {
                             val /= animRotMaxSens;
                         }
-                        anim.SetFloat("CWRot", Mathf.Lerp(anim.GetFloat("CWRot"), val, animSpeed));
+                        anim.SetFloat("CWRot", Mathf.Lerp(anim.GetFloat("CWRot"), val, animSpeed*Time.fixedDeltaTime));
                     }
 
                     Quaternion newRot = HasSmoothingRotation ?

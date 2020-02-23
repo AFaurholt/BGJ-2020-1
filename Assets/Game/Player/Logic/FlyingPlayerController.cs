@@ -109,8 +109,8 @@ public class FlyingPlayerController : MonoBehaviour
             }
         }
 
-        anim.SetFloat("X", Mathf.Lerp(anim.GetFloat("X"), x, animSpeed));
-        anim.SetFloat("Y", Mathf.Lerp(anim.GetFloat("Y"), y, animSpeed));
+        anim.SetFloat("X", Mathf.Lerp(anim.GetFloat("X"), x, animSpeed*Time.deltaTime));
+        anim.SetFloat("Y", Mathf.Lerp(anim.GetFloat("Y"), y, animSpeed*Time.deltaTime));
     }
 
     /// <summary>

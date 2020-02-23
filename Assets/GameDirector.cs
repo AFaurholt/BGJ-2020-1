@@ -60,6 +60,7 @@ public class GameDirector : MonoBehaviour
 
         ctx.IntroDirector.Play();
         ctx.HeadGibber.GibbedToDeath += GameOver;
+        ctx.DifficultyManager.BeginDifficulty();
     }
 
     private void GoToMenu()
@@ -67,6 +68,7 @@ public class GameDirector : MonoBehaviour
         Time.timeScale = 1;
         SceneUtils.MakeSureSceneIsLoaded(MenuScene);
         SceneUtils.UnloadSceneIfExists(GameOverScene);
+        SceneUtils.UnloadSceneIfExists(GameScene);
         SceneUtils.ReloadScene(GameScene, active: true);
     }
 
@@ -88,6 +90,7 @@ public class GameDirector : MonoBehaviour
             }
 
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             GameContext.Current.CameraController.enabled = false;
             DOTween.To(() => Time.timeScale, v => Time.timeScale = v, 0.2f, 0.8f).SetUpdate(true);
 
@@ -106,6 +109,7 @@ public class GameDirector : MonoBehaviour
         IEnumerator Restart_C()
         {
             SceneUtils.UnloadSceneIfExists(GameOverScene);
+            SceneUtils.UnloadSceneIfExists(GameScene);
             SceneUtils.ReloadScene(GameScene, active: true);
 
             yield return null;
@@ -125,7 +129,8 @@ public class GameDirector : MonoBehaviour
     private void BindGameOver()
     {
         GameOverContext.Current.RestartButton.onClick.AddListener(Restart);
-        GameOverContext.Current.MenuButton.onClick.AddListener(GoToMenu);
+        //GameOverContext.Current.MenuButton.onClick.AddListener(GoToMenu);
+        GameOverContext.Current.MenuButton.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene("START SCENE"));
     }
 
     // ========================== Utils       ==========================
