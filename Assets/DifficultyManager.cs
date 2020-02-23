@@ -87,9 +87,11 @@ public class DifficultyManager : MonoBehaviour
 
     public void SpawnObstacle()
     {
+        Debug.Log("hi");
         int r = Random.Range(0, obstacleList.Count);
         GameObject go = Instantiate(obstacleList[r], spawnPosition.Get(), Quaternion.identity);
         obstacles.Add(go);
+        oCount += 1;
         // extra stuff like giving them speed
     }
 

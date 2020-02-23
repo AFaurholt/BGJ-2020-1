@@ -313,7 +313,7 @@ MonoBehaviour:
   MoveRelativeToRotation: 1
   _smoothTime: 0.2
   anim: {fileID: 6215939534359443173}
-  animSpeed: 0.07
+  animSpeed: 0.1
 --- !u!1 &7706629831806080349
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +437,7 @@ MonoBehaviour:
   anim: {fileID: 6215939534359443173}
   animRotSensibility: 0
   animRotMaxSens: 60
-  animSpeed: 0.2
+  animSpeed: 0.5
 --- !u!1001 &7706629833191557393
 PrefabInstance:
   m_ObjectHideFlags: 0
