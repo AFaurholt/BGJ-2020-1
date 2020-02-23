@@ -1,13 +1,21 @@
 ﻿using System;
-using UnityEditor;
 using UnityEngine.SceneManagement;
 
-[InitializeOnLoad]
+#if UNITY_EDITOR
+using UnityEditor;
+[InitializeOnLoad] 
+#endif
 public static class SceneUtils
 {
     public static event Action<string> SceneLoaded;
-
+  
     static SceneUtils()
+    {
+        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+    }
+
+    [UnityEngine.RuntimeInitializeOnLoadMethod]
+    static void Init()
     {
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
     }
