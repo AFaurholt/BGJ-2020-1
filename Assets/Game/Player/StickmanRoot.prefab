@@ -1,0 +1,660 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &655761125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191701178286140328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d2d2880500a3c43b3ab3993f4b31a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wormholeTag: Wormhole
+  exitedWormhole:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1671183585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1163183029817658678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d2d2880500a3c43b3ab3993f4b31a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wormholeTag: Wormhole
+  exitedWormhole:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1177260808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209522868536419668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d2d2880500a3c43b3ab3993f4b31a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wormholeTag: Wormhole
+  exitedWormhole:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1954733152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256484892932487351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d2d2880500a3c43b3ab3993f4b31a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wormholeTag: Wormhole
+  exitedWormhole:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &223591137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727634932746958464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d2d2880500a3c43b3ab3993f4b31a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wormholeTag: Wormhole
+  exitedWormhole:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &558693305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3749723100287210373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d2d2880500a3c43b3ab3993f4b31a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wormholeTag: Wormhole
+  exitedWormhole:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &306192689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4989698299596257703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d2d2880500a3c43b3ab3993f4b31a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wormholeTag: Wormhole
+  exitedWormhole:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &5766143920542091396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5766143920542091397}
+  m_Layer: 8
+  m_Name: StickmanRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5766143920542091397
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5766143920542091396}
+  m_LocalRotation: {x: -0.49991274, y: 0.49991277, z: 0.5000873, w: 0.50008726}
+  m_LocalPosition: {x: -2.202866, y: -7.6376505, z: -5.193898}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5925053565823750798}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 90.00001}
+--- !u!114 &1116514895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6015495002444733241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d2d2880500a3c43b3ab3993f4b31a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wormholeTag: Wormhole
+  exitedWormhole:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &919817452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6318290081772859122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d2d2880500a3c43b3ab3993f4b31a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wormholeTag: Wormhole
+  exitedWormhole:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &440023036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7009384611284458273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d2d2880500a3c43b3ab3993f4b31a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wormholeTag: Wormhole
+  exitedWormhole:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &11872570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7580826918765314200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d2d2880500a3c43b3ab3993f4b31a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wormholeTag: Wormhole
+  exitedWormhole:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &620770252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7678674391790447697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d2d2880500a3c43b3ab3993f4b31a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wormholeTag: Wormhole
+  exitedWormhole:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1492211912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8112477637965316690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d2d2880500a3c43b3ab3993f4b31a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wormholeTag: Wormhole
+  exitedWormhole:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1336068106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8969795088913152821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d2d2880500a3c43b3ab3993f4b31a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wormholeTag: Wormhole
+  exitedWormhole:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1202297541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9068475206598598735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d2d2880500a3c43b3ab3993f4b31a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wormholeTag: Wormhole
+  exitedWormhole:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &94978699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9167011689973286077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d2d2880500a3c43b3ab3993f4b31a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wormholeTag: Wormhole
+  exitedWormhole:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1001 &5766143919672512931
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5766143920542091397}
+    m_Modifications:
+    - target: {fileID: 161972954996785965, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 161972954996785965, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 161972954996785965, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.015243764
+      objectReference: {fileID: 0}
+    - target: {fileID: 161972954996785965, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 161972954996785965, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 161972954996785965, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.000000029802322
+      objectReference: {fileID: 0}
+    - target: {fileID: 161972954996785965, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 161972954996785965, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 161972954996785965, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 161972954996785965, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 161972954996785965, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 161972954996785965, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161972954996785965, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161972954996785965, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3775186727583035710, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_Name
+      value: fully_rigged-stickman
+      objectReference: {fileID: 0}
+    - target: {fileID: 5135727852883770682, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.12250009
+      objectReference: {fileID: 0}
+    - target: {fileID: 5135727852883770682, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.000000049872863
+      objectReference: {fileID: 0}
+    - target: {fileID: 5135727852883770682, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.6999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5135727853915971962, guid: 3759c07d4c923384883d4767019a764a,
+        type: 3}
+      propertyPath: offsetParent
+      value: 
+      objectReference: {fileID: 5766143920542091397}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3759c07d4c923384883d4767019a764a, type: 3}
+--- !u!4 &5925053565823750798 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 161972954996785965, guid: 3759c07d4c923384883d4767019a764a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766143919672512931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7678674391790447697 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4221373637968870898, guid: 3759c07d4c923384883d4767019a764a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766143919672512931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &191701178286140328 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5957271013747014155, guid: 3759c07d4c923384883d4767019a764a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766143919672512931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1256484892932487351 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4713750394687809812, guid: 3759c07d4c923384883d4767019a764a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766143919672512931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8969795088913152821 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3206114625085893270, guid: 3759c07d4c923384883d4767019a764a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766143919672512931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1727634932746958464 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5187231467367556899, guid: 3759c07d4c923384883d4767019a764a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766143919672512931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6318290081772859122 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 552366066037833553, guid: 3759c07d4c923384883d4767019a764a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766143919672512931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1163183029817658678 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4620976435120610453, guid: 3759c07d4c923384883d4767019a764a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766143919672512931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7009384611284458273 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3549719906488994434, guid: 3759c07d4c923384883d4767019a764a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766143919672512931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9068475206598598735 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3304735576877756908, guid: 3759c07d4c923384883d4767019a764a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766143919672512931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8112477637965316690 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2346439410081518577, guid: 3759c07d4c923384883d4767019a764a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766143919672512931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1209522868536419668 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4669216846737110263, guid: 3759c07d4c923384883d4767019a764a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766143919672512931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6015495002444733241 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 251675520381536922, guid: 3759c07d4c923384883d4767019a764a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766143919672512931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7580826918765314200 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4121344183042707771, guid: 3759c07d4c923384883d4767019a764a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766143919672512931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3749723100287210373 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7209352688346710566, guid: 3759c07d4c923384883d4767019a764a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766143919672512931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4989698299596257703 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1529972021538449412, guid: 3759c07d4c923384883d4767019a764a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766143919672512931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9167011689973286077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3400976141697013022, guid: 3759c07d4c923384883d4767019a764a,
+    type: 3}
+  m_PrefabInstance: {fileID: 5766143919672512931}
+  m_PrefabAsset: {fileID: 0}
