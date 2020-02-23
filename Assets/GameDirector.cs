@@ -90,6 +90,7 @@ public class GameDirector : MonoBehaviour
             }
 
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             GameContext.Current.CameraController.enabled = false;
             DOTween.To(() => Time.timeScale, v => Time.timeScale = v, 0.2f, 0.8f).SetUpdate(true);
 
