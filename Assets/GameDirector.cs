@@ -61,8 +61,8 @@ public class GameDirector : MonoBehaviour
 
     private void GameOver()
     {
-        SceneUtils.MakeSureSceneIsLoaded(GameOverScene);
         GameContext.Current.CameraController.enabled = false;
+        SceneUtils.MakeSureSceneIsLoaded(GameOverScene);
         DOTween.To(() => Time.timeScale, v => Time.timeScale = v, 0.2f, 0.8f).SetUpdate(true);
     }
 
