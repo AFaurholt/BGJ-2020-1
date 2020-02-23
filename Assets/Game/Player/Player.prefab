@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GravityVector3: {x: 0, y: 0, z: 0}
-  MoveForce: 30
+  MoveForce: 37
   UpVector3: {x: 0, y: 0, z: 1}
   RightVector3: {x: 1, y: 0, z: 0}
   CopyTransform: {fileID: 7706629832402297652}

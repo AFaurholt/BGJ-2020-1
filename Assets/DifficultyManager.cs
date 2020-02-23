@@ -22,6 +22,9 @@ public class DifficultyManager : MonoBehaviour
     [SerializeField] Vector3 oCheckV3;
     public float obstacleCheckDistance = 10;
 
+    public float cooldown = 0.1f;
+    float timer = 10f;
+
     void Start()
     {
         ResetDifficulty();
@@ -40,6 +43,8 @@ public class DifficultyManager : MonoBehaviour
         if (difficulty < maxDifficulty)
             difficulty = Mathf.Min(difficulty + Time.deltaTime, maxDifficulty);
         CheckObstacles();
+        if (timer < cooldown)
+            timer += Time.deltaTime;
     }
 
     private void CheckObstacles()
@@ -48,19 +53,25 @@ public class DifficultyManager : MonoBehaviour
 
         foreach (GameObject g in obstacles)
         {
+            if(g.transform.position.y-playerTransform.position.y > obstacleCheckDistance)
+            {
+                toDelete.Add(g);
+            }
+            /*
             if (Vector3.Distance(
                 Vector3.Scale(g.transform.position, oCheckV3),
                 Vector3.Scale(playerTransform.position, oCheckV3)) > obstacleCheckDistance)
             {
                 toDelete.Add(g);
             }
-
+            */
         }
 
         foreach (GameObject g in toDelete)
         {
             obstacles.Remove(g);
             Destroy(g);
+            oCount -= 1;
         }
         toDelete.Clear();
     }
@@ -69,7 +80,9 @@ public class DifficultyManager : MonoBehaviour
     {
         if (!hasBegun)
             return;
-        float r = Random.value;
+        if (timer < cooldown)
+            return;
+        float r = Random.Range(0f,1f);
         float chanceToSpawn = 0;
         if (oCount < minObstacles)
             chanceToSpawn = 1;
@@ -77,21 +90,22 @@ public class DifficultyManager : MonoBehaviour
         {
             chanceToSpawn = 1f - (oCount / ((maxObstacles - minObstacles) * difficulty / maxDifficulty + minObstacles));
         }
-
+        chanceToSpawn *= Time.fixedDeltaTime;
         if (chanceToSpawn > r)
         {
             SpawnObstacle();
+            Debug.Log(oCount+"| "+chanceToSpawn);
         }
 
     }
 
     public void SpawnObstacle()
     {
-        Debug.Log("hi");
         int r = Random.Range(0, obstacleList.Count);
-        GameObject go = Instantiate(obstacleList[r], spawnPosition.Get(), Quaternion.identity);
+        GameObject go = Instantiate(obstacleList[r], spawnPosition.Get(), Quaternion.Euler(90,Random.Range(0f,360f),0f));
         obstacles.Add(go);
         oCount += 1;
+        timer = 0;
         // extra stuff like giving them speed
     }
 
