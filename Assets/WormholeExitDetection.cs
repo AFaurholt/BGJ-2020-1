@@ -15,6 +15,13 @@ public class WormholeExitDetection : MonoBehaviour
         {
             counter++;
         }
+        if(other.gameObject.layer == 10)
+        {
+            if (exitedWormhole != null)
+                exitedWormhole.Invoke();
+            GetComponent<GibbingScript>().Gib();
+            Debug.Log("Hello my dudes");
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -29,5 +36,6 @@ public class WormholeExitDetection : MonoBehaviour
                 GetComponent<GibbingScript>().Gib();
             }
         }
+        Debug.Log(other.tag);
     }
 }
